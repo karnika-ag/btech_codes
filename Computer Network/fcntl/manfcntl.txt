@@ -1,0 +1,96 @@
+The <fcntl.h> header defines the following requests and arguments for use by the functions fcntl() and open().
+
+Values for cmd used by fcntl() (the following values are unique):
+
+F_DUPFD
+    Duplicate file descriptor. 
+F_GETFD
+    Get file descriptor flags. 
+F_SETFD
+    Set file descriptor flags. 
+F_GETFL
+    Get file status flags and file access modes. 
+F_SETFL
+    Set file status flags. 
+F_GETLK
+    Get record locking information. 
+F_SETLK
+    Set record locking information. 
+F_SETLKW
+    Set record locking information; wait if blocked. 
+
+File descriptor flags used for fcntl():
+
+FD_CLOEXEC
+    Close the file descriptor upon execution of an exec family function. 
+
+Values for l_type used for record locking with fcntl() (the following values are unique):
+
+F_RDLCK
+    Shared or read lock. 
+F_UNLCK
+    Unlock. 
+F_WRLCK
+    Exclusive or write lock. 
+
+The values used for l_whence, SEEK_SET, SEEK_CUR and SEEK_END are defined as described in <unistd.h>.
+
+The following four sets of values for oflag used by open() are bitwise distinct:
+
+O_CREAT
+    Create file if it does not exist. 
+O_EXCL
+    Exclusive use flag. 
+O_NOCTTY
+    Do not assign controlling terminal. 
+O_TRUNC
+    Truncate flag. 
+
+File status flags used for open() and fcntl():
+
+O_APPEND
+    Set append mode. 
+O_DSYNC
+    Write according to synchronised I/O data integrity completion. 
+O_NONBLOCK
+    Non-blocking mode. 
+O_RSYNC
+    Synchronised read I/O operations. 
+O_SYNC
+    Write according to synchronised I/O file integrity completion. 
+
+Mask for use with file access modes:
+
+O_ACCMODE
+    Mask for file access modes. 
+
+File access modes used for open() and fcntl():
+
+O_RDONLY
+    Open for reading only. 
+O_RDWR
+    Open for reading and writing. 
+O_WRONLY
+    Open for writing only. 
+
+The symbolic names for file modes for use as values of mode_t are defined as described in <sys/stat.h>.
+
+The structure flock describes a file lock. It includes the following members:
+
+
+short l_type   type of lock; F_RDLCK, F_WRLCK, F_UNLCK
+short l_whence flag for starting offset
+off_t l_start  relative offset in bytes
+off_t l_len    size; if 0 then until EOF
+pid_t l_pid    process ID of the process holding the lock; returned with F_GETLK
+
+The off_t and pid_t types are defined as described in <sys/types.h>.
+
+The following are declared as functions and may also be defined as macros. Function prototypes must be provided for use with an ISO C compiler.
+
+
+int  creat(const char *, mode_t);
+int  fcntl(int, int, ...);
+int  open(const char *, int, ...);
+
+Inclusion of the <fcntl.h> header may also make visible all symbols from <sys/stat.h> and <unistd.h>. 

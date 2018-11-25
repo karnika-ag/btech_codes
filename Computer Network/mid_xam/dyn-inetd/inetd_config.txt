@@ -1,0 +1,6 @@
+1 TCP 7066 External 2 process nowait s1
+2 TCP 7022 Internal 2 thread nowait no
+3 UDP 7033 Internal 0 function nowait no
+4 TCP 7088 External 0 process nowait s4
+5 UDP 7055 External 0 process wait s5
+6 TCP 7099 External 2 process nowait s1

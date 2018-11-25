@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+int main()
+{
+int pid;
+int file=open("f2.txt",O_RDWR,0777);
+int sin,sout;
+sin=dup(0);
+sout=dup(1);
+dup2(sout,1);
+pid=fork();
+if(pid>0)
+{
+char str[50];
+//int i;
+//for(i=0;i<5;i++)
+//{
+printf("parent: enter string\n");
+scanf("%[^\n]%*c",str);
+write(1,str,strlen(str));
+//}
+}
+else if(pid==0)
+{
+char str[50];
+//int i;
+//for(i=0;i<5;i++)
+//{
+printf("child: enter string\n");
+scanf("%[^\n]%*c",str);
+write(1,str,strlen(str));
+//}
+
+}
+else
+{
+perror("forking error:");
+exit(0);
+}
+
+return 0;
+}

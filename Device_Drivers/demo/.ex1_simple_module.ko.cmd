@@ -1,0 +1,1 @@
+cmd_/home/light/demo/ex1_simple_module.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-44-generic/scripts/module-common.lds --build-id  -o /home/light/demo/ex1_simple_module.ko /home/light/demo/ex1_simple_module.o /home/light/demo/ex1_simple_module.mod.o

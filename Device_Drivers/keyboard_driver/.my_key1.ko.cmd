@@ -1,0 +1,1 @@
+cmd_/home/light/keyboard_driver/my_key1.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-44-generic/scripts/module-common.lds --build-id  -o /home/light/keyboard_driver/my_key1.ko /home/light/keyboard_driver/my_key1.o /home/light/keyboard_driver/my_key1.mod.o

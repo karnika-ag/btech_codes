@@ -1,0 +1,10 @@
+http://www2.htw-dresden.de/~robge/bs2/prak/src/rw-problem-shm.c
+
+http://cboard.cprogramming.com/c-programming/144773-reader-writer-implementation-sync-problem.html
+
+http://homepages.warwick.ac.uk/~cssbd/cs224/sun/dpp.html
+
+
+cmd to delete all semaphores-    ipcs | nawk -v u=`whoami` '/Shared/,/^$/{ if($6==0&&$3==u) print "ipcrm shm",$2,";"}/Semaphore/,/^$/{ if($3==u) print "ipcrm sem",$2,";"}' | /bin/sh
+
+and link to this is- http://stackoverflow.com/questions/2143404/delete-all-shared-memory-and-semaphores-on-linux

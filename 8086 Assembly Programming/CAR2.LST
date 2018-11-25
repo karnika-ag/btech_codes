@@ -1,0 +1,261 @@
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 1
+car2.asm
+
+
+
+      1				     ;---------------------------------
+      2				     ;---------------------------------
+      3				     ;.386
+      4				     ;---------------------------------
+      5	0000			     .MODEL  SMALL
+      6				     ;---------------------------------
+      7	0000			     .STACK  100H
+      8				     ;---------------------------------
+      9	0000			     .DATA
+     10	      =000C		     XORG    EQU     12
+     11	      =000A		     YORG    EQU     10
+     12	0000  00		     INCR    DB	     0
+     13
+     14	0001  00		     ROW     DB	     0
+     15	0002  00		     COL     DB	     0
+     16	0003  ??		     ROW1    DB	     ?
+     17	0004  ??		     COL1    DB	     ?
+     18	0005  ??		     ROW2    DB	     ?
+     19	0006  ??		     COL2    DB	     ?
+     20
+     21	0007  ????		     TEMP    DW	     ?
+     22	0009  ????		     TEMP2   DW	     ?
+     23				     ;---------------------------------
+     24	000B			     .CODE
+     25	0000			     MAIN    PROC    FAR
+     26	0000  B8 0000s			     MOV     AX,@data
+     27	0003  8E D8			     MOV     DS,AX
+     28
+     29	0005  80 3E 0000r 35	     M00:    CMP     INCR,35H
+     30	000A  74 00			     JE	     M000
+**Error** car2.asm(31) Relative	jump out of range by 00CDh bytes
+     31
+     32	000C  B9 0002			     MOV     CX,2
+     33	000F  E8 017B		     D:	     CALL    DELY
+     34	0012  E2 FB			     LOOP    D
+     35
+     36	0014  C6 06 0003r 00		     MOV     ROW1,00H		     ;START ROW
+     37	0019  C6 06 0004r 00		     MOV     COL1,00H	     ;START COL
+     38	001E  C6 06 0005r 18		     MOV     ROW2,18H		 ;END ROW
+     39	0023  C6 06 0006r 4F		     MOV     COL2,4FH	     ;END COL
+     40	0028  B7 00			     MOV     BH,00H		     ;BG COLOR,	FG COLOR
+     41	002A  E8 013F			     CALL    CLSCR		     ;CLEAR SCREEN
+     42
+     43
+     44	002D  C6 06 0003r 0A		     MOV     ROW1,YORG		     ;START ROW
+     45	0032  C6 06 0004r 00		     MOV     COL1,XORG-12    ;START COL
+     46	0037  A0 0000r			     MOV     AL,INCR
+     47	003A  00 06 0004r		     ADD     COL1,AL
+     48	003E  C6 06 0005r 0D		     MOV     ROW2,YORG+3	 ;END ROW
+     49	0043  C6 06 0006r 18		     MOV     COL2,XORG+12    ;END COL
+     50	0048  A0 0000r			     MOV     AL,INCR
+     51	004B  00 06 0006r		     ADD     COL2,AL
+     52	004F  B7 9F			     MOV     BH,9FH		     ;BG COLOR,	FG COLOR
+     53	0051  E8 0118			     CALL    CLSCR		     ;CLEAR SCREEN
+     54
+     55	0054  C6 06 0003r 06		     MOV     ROW1,YORG-4
+     56	0059  C6 06 0004r 03		     MOV     COL1,XORG-9
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 2
+car2.asm
+VIDPRO01  basic	functions
+
+
+     57	005E  A0 0000r			     MOV     AL,INCR
+     58	0061  00 06 0004r		     ADD     COL1,AL
+     59	0065  C6 06 0005r 09		     MOV     ROW2,YORG-1
+     60	006A  C6 06 0006r 13		     MOV     COL2,XORG+7
+     61	006F  A0 0000r			     MOV     AL,INCR
+     62	0072  00 06 0006r		     ADD     COL2,AL
+     63	0076  E8 00F3			     CALL    CLSCR		     ;CLEAR SCREEN
+     64
+     65	0079  C6 06 0003r 07		     MOV     ROW1,YORG-3
+     66	007E  C6 06 0004r 05		     MOV     COL1,XORG-7
+     67	0083  A0 0000r			     MOV     AL,INCR
+     68	0086  00 06 0004r		     ADD     COL1,AL
+     69	008A  C6 06 0005r 08		     MOV     ROW2,YORG-2
+     70	008F  C6 06 0006r 09		     MOV     COL2,XORG-3
+     71	0094  A0 0000r			     MOV     AL,INCR
+     72	0097  00 06 0006r		     ADD     COL2,AL
+     73	009B  B7 FF			     MOV     BH,0FFH
+     74
+     75	009D  B9 0002			     MOV     CX,2    ;NO OF GLASS PANES
+     76	00A0  E8 00C9		     M10:    CALL    CLSCR		     ;CLEAR SCREEN
+     77	00A3  80 06 0004r 08			     ADD     COL1,8
+     78	00A8  80 06 0006r 08		     ADD     COL2,8
+     79	00AD  E2 F1			     LOOP    M10
+     80
+     81	00AF  C6 06 0003r 0C		     MOV     ROW1,YORG+2
+     82	00B4  C6 06 0004r 03		     MOV     COL1,XORG-9
+     83	00B9  A0 0000r			     MOV     AL,INCR
+     84	00BC  00 06 0004r		     ADD     COL1,AL
+     85	00C0  C6 06 0005r 0E		     MOV     ROW2,YORG+4
+     86	00C5  C6 06 0006r 06		     MOV     COL2,XORG-6
+     87	00CA  A0 0000r			     MOV     AL,INCR
+     88	00CD  00 06 0006r		     ADD     COL2,AL
+     89	00D1  B7 AA			     MOV     BH,0AAH
+     90
+     91	00D3  B9 0002			     MOV     CX,2    ;NO OF WHEELS
+     92	00D6  E8 0093		     M20:    CALL    CLSCR		     ;CLEAR SCREEN
+     93	00D9  80 06 0004r 10		     ADD     COL1,16
+     94	00DE  80 06 0006r 10		     ADD     COL2,16
+     95	00E3  E2 F1			     LOOP    M20
+     96
+     97	00E5  C6 06 0003r 0D		     MOV     ROW1,YORG+3
+     98	00EA  C6 06 0004r 04		     MOV     COL1,XORG-8
+     99	00EF  A0 0000r			     MOV     AL,INCR
+    100	00F2  00 06 0004r		     ADD     COL1,AL
+    101	00F6  C6 06 0005r 0D		     MOV     ROW2,YORG+3
+    102	00FB  C6 06 0006r 04		     MOV     COL2,XORG-8
+    103	0100  A0 0000r			     MOV     AL,INCR
+    104	0103  00 06 0006r		     ADD     COL2,AL
+    105	0107  B7 00			     MOV     BH,00H
+    106
+    107	0109  B9 0002			     MOV     CX,2    ;NO OF WHEEL CENTERS
+    108	010C  E8 005D		     M30:    CALL    CLSCR		     ;CLEAR SCREEN
+    109	010F  80 06 0004r 10		     ADD     COL1,16
+    110	0114  80 06 0006r 10		     ADD     COL2,16
+    111	0119  E2 F1			     LOOP    M30
+    112
+    113	011B  C6 06 0003r 0A		     MOV     ROW1,YORG
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 3
+car2.asm
+VIDPRO01  basic	functions
+
+
+    114	0120  C6 06 0004r 00		     MOV     COL1,XORG-12
+    115	0125  A0 0000r			     MOV     AL,INCR
+    116	0128  00 06 0004r		     ADD     COL1,AL
+    117	012C  C6 06 0005r 0A		     MOV     ROW2,YORG
+    118	0131  C6 06 0006r 00		     MOV     COL2,XORG-12
+    119	0136  A0 0000r			     MOV     AL,INCR
+    120	0139  00 06 0006r		     ADD     COL2,AL
+    121	013D  B7 EE			     MOV     BH,0EEH
+    122
+    123	013F  B9 0002			     MOV     CX,2    ;NO OF HEADLIGHTS
+    124	0142  E8 0027		     M40:    CALL    CLSCR		     ;CLEAR SCREEN
+    125	0145  80 06 0004r 18		     ADD     COL1,24
+    126	014A  80 06 0006r 18		     ADD     COL2,24
+    127	014F  E2 F1			     LOOP    M40
+    128	0151  FE 06 0000r		     INC     INCR
+    129	0155  E9 FEAD			     JMP     M00
+    130	0158			     M000:
+    131	0158  B8 4C00			     MOV     AX,4C00H
+    132	015B  CD 21			     INT     21H
+    133	015D			     MAIN    ENDP
+    134
+    135	015D			     STCSR   PROC    NEAR
+    136					     PUSHA
+**Error** car2.asm(137)	Illegal	instruction for	currently selected processor(s)
+    137	015D  B4 02			     MOV     AH,02H   ;REQUEST SET CURSOR
+    138	015F  B7 00			     MOV     BH,00    ;PG NO=0
+    139	0161  8A 36 0001r		     MOV     DH,ROW   ;ROW NO=8
+    140	0165  8A 16 0002r		     MOV     DL,COL   ;COLUMN=15
+    141	0169  CD 10			     INT     10H
+    142					     POPA
+**Error** car2.asm(143)	Illegal	instruction for	currently selected processor(s)
+    143	016B  C3			     RET
+    144	016C			     STCSR   ENDP
+    145
+    146	016C			     CLSCR   PROC    NEAR
+    147					     PUSHA
+**Error** car2.asm(148)	Illegal	instruction for	currently selected processor(s)
+    148	016C  B4 06			     MOV     AH,06; ;AH=06(SCROLL),AL=00(FULLSCREEN)
+    149	016E  A0 0005r			     MOV     AL,ROW2
+    150	0171  2A 06 0003r		     SUB     AL,ROW1
+    151	0175  FE C0			     INC     AL
+    152	0177  8A 2E 0003r		     MOV     CH,ROW1  ;UPPER LEFT ROW:COLUMN
+    153	017B  8A 0E 0004r		     MOV     CL,COL1
+    154	017F  8A 36 0005r		     MOV     DH,ROW2  ;LOWER RIGHT ROW:COLUMN
+    155	0183  8A 16 0006r		     MOV     DL,COL2
+    156	0187  CD 10			     INT     10H      ;CALL INTERRUPT
+    157	0189  E8 FFD1			     CALL    STCSR
+    158						     POPA
+**Error** car2.asm(159)	Illegal	instruction for	currently selected processor(s)
+    159	018C  C3			     RET
+    160	018D			     CLSCR   ENDP
+    161
+    162	018D			     DELY    PROC    NEAR
+    163	018D  C7 06 0007r 2710		     MOV     TEMP,10000
+    164	0193  90		     T:	     NOP
+    165	0194  FF 0E 0007r		     DEC     TEMP
+    166	0198  83 3E 0007r 00		     CMP     TEMP,0
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 4
+car2.asm
+VIDPRO01  basic	functions
+
+
+    167	019D  7F F4			     JG	     T
+    168	019F  C3			     RET
+    169	01A0			     DELY    ENDP
+    170
+    171				     END     MAIN
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 5
+Symbol Table
+VIDPRO01  basic	functions
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/25/14"
+??FILENAME			  Text	 "car2	  "
+??TIME				  Text	 "23:56:12"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 CAR2
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+CLSCR				  Near	 _TEXT:016C
+COL				  Byte	 DGROUP:0002
+COL1				  Byte	 DGROUP:0004
+COL2				  Byte	 DGROUP:0006
+D				  Near	 _TEXT:000F
+DELY				  Near	 _TEXT:018D
+INCR				  Byte	 DGROUP:0000
+M00				  Near	 _TEXT:0005
+M000				  Near	 _TEXT:0158
+M10				  Near	 _TEXT:00A0
+M20				  Near	 _TEXT:00D6
+M30				  Near	 _TEXT:010C
+M40				  Near	 _TEXT:0142
+MAIN				  Far	 _TEXT:0000
+ROW				  Byte	 DGROUP:0001
+ROW1				  Byte	 DGROUP:0003
+ROW2				  Byte	 DGROUP:0005
+STCSR				  Near	 _TEXT:015D
+T				  Near	 _TEXT:0193
+TEMP				  Word	 DGROUP:0007
+TEMP2				  Word	 DGROUP:0009
+XORG				  Number 000C
+YORG				  Number 000A
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  000B Word	  Public  DATA
+_TEXT				  16  01A0 Word	  Public  CODE
+Turbo Assembler	 Version 4.1	    02/25/14 23:56:12	    Page 6
+Error Summary
+VIDPRO01  basic	functions
+
+
+**Error** car2.asm(31) Relative	jump out of range by 00CDh bytes
+**Error** car2.asm(137)	Illegal	instruction for	currently selected processor(s)
+**Error** car2.asm(143)	Illegal	instruction for	currently selected processor(s)
+**Error** car2.asm(148)	Illegal	instruction for	currently selected processor(s)
+**Error** car2.asm(159)	Illegal	instruction for	currently selected processor(s)
+

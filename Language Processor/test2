@@ -1,0 +1,40 @@
+int main()
+{
+  int a,b,c,d;
+  
+    if(a+b)
+     b=-c;
+    else
+    {
+    switch(a+b)
+	{
+		case 0: d=a+b;
+		break;
+		case 1:
+		{
+			a=b;
+			switch(b+-4)
+			{
+				case 10: d=b@c@d*a;
+				break;
+				case 20:
+				case 30: d=c;
+				break;
+				default: b=c;
+				break;
+			}
+		} 
+		case 2: a=-(b*c+d);
+		break;
+		case 3: b=b+d;
+		case 4: c=c&&d&&a||b;
+		case 5: b*=-c;
+		default: a=b;
+		break;
+	}
+    }
+    
+  
+  a/=b;
+  b+=-c+(a&&b^c)/d;
+}

@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0251)http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#2 -->
+<html lang="en" dir="ltr" class="js no-touch localstorage sessionstorage contenteditable use-opacity-transitions"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Disqus Comments</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <style>
+        html {
+            overflow: hidden;
+        }
+        
+    </style>
+
+<style type="text/css"></style><link rel="stylesheet" href="http://a.disquscdn.com/next/embed/styles/lounge.341f7fbcdb0ea0d6b8bcc4183fd006fd.css" media="all"><link rel="stylesheet" type="text/css" href="chrome-extension://neomigpibafpboiknmijddgnncengfnm/css/divpop.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="remote/config" src="config.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="common.bundle" src="common.a906d4ca7369633941e2802262ea36b5.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="lounge.bundle" src="lounge.40812c852414db952511b76a067c6c7c.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="http://www.google-analytics.com/ga.js" src="ga.js"></script><style id="css_1425572662963"></style><!--<base target="_parent">--><base href="." target="_parent"><script src="event.js" async="" charset="UTF-8"></script><link rel="stylesheet" href="http://a.disquscdn.com/next/embed/styles/discovery.cf5938183bbd248821e093917d875487.css" media="all"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="discovery/main" src="discovery.66443eb9c3fd579879dce96030aba494.js"></script><script src="event(1).js" async="" charset="UTF-8"></script></head>
+<body class="serif">
+    
+    <!--[if lte IE 8]>
+<script src="//a.disquscdn.com/1424976780/build/vendor/ie8.js"></script>
+<![endif]-->
+<!--[if IE 9]>
+<script src="//a.disquscdn.com/1424976780/build/vendor/ie9.js"></script>
+<![endif]-->
+
+    
+<script type="text/json" id="disqus-urls">{
+    "root":"//disqus.com",
+    "next":"//a.disquscdn.com/next/current/embed"
+}</script>
+
+    
+
+    <div id="error" style="display:none; text-align: center">
+        <p>We were unable to load Disqus. If you are a moderator please see our <a href="https://docs.disqus.com/help/83/"> troubleshooting guide</a>. </p>
+    </div>
+
+    
+    <script type="text/json" id="disqus-forumData">{"session":{"canModerate":false,"audienceSyncVerified":false,"canReply":true,"mustVerifyEmail":false},"features":{},"forum":{"category":null,"description":null,"founder":"19333562","settings":{"canEnableSponsoredComments":false,"discoveryVariant":"default","allowAnonPost":true,"allowMedia":true,"moderatorText":"","typeface":"auto","disable3rdPartyTrackers":false,"promotedDiscoveryEnabled":false,"discoveryMax":false,"ssoRequired":false,"discoveryLocked":false,"audienceSyncEnabled":false,"hasCustomAvatar":false,"organicDiscoveryEnabled":true,"discoverySettingsUrl":"https://techdeviancy.disqus.com/admin/settings/ads/","discoveryThumbnailsEnabled":false,"colorScheme":"auto","sponsoredCommentsEnabled":false,"linkAffiliationEnabled":false},"url":"http://www.thomasstover.com","guidelines":null,"favicon":{"permalink":"http://disqus.com/api/forums/favicons/techdeviancy.jpg","cache":"//a.disquscdn.com/1424976780/images/favicon-default.png"},"language":"en","avatar":{"small":{"permalink":"http://disqus.com/api/forums/avatars/techdeviancy.jpg?size=32","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"http://disqus.com/api/forums/avatars/techdeviancy.jpg?size=92","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"}},"pk":1139085,"signedUrl":"http://disq.us/?url=http%3A%2F%2Fwww.thomasstover.com&key=ey3u9S6ftCfAzbf31wvEvg","raw_guidelines":null,"id":"techdeviancy","channel":null,"name":"Tech Deviancy"}}</script>
+
+    
+    <script type="text/json" id="disqus-threadData">{"cursor":{"hasPrev":false,"prev":null,"total":19,"hasNext":false,"next":"1:0:0"},"code":0,"response":{"lastModified":1424422914,"posts":[{"parent":null,"likes":4,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Torkel Bj\u00f8rnson-Langen","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Greetings from Norway,\n\nNice resource. It really got me started with Unix sockets.\n\nBut I think I found a bug. At line 61-63 in server1.c accept() is called, but the variable address_length is used uninitialized. The manual page of accept() says this: (It's initialized in server2.c, but there it's defined twice!)\n\n  The addrlen argument is a value-result argument: the caller must\n  initialize it to contain the size (in bytes) of the structure\n  pointed to by addr; on return it will contain the actual size of\n  the peer address.\n\nAnd I found it slightly confusing that you reuse the server address structure, since the address returned by accept() is for the peer. So why not just pass NULL since the example don't use the result?\n\n\n\nKeep up the god work!","createdAt":"2013-08-07T00:43:01","id":"990903341","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Greetings from Norway,\u003c/p>\u003cp>Nice resource. It really got me started with Unix sockets.\u003c/p>\u003cp>But I think I found a bug. At line 61-63 in server1.c accept() is called, but the variable address_length is used uninitialized. The manual page of accept() says this: (It's initialized in server2.c, but there it's defined twice!)\u003c/p>\u003cp>  The addrlen argument is a value-result argument: the caller must\u003cbr>  initialize it to contain the size (in bytes) of the structure\u003cbr>  pointed to by addr; on return it will contain the actual size of\u003cbr>  the peer address.\u003c/p>\u003cp>And I found it slightly confusing that you reuse the server address structure, since the address returned by accept() is for the peer. So why not just pass NULL since the example don't use the result?\u003c/p>\u003cp>Keep up the god work!\u003c/p>","isSpam":false,"isHighlighted":false,"points":4},{"parent":null,"likes":1,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"a friend","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Reading 256 bytes with read(2) (which will read up to 256 bytes) will then trigger a write to a memory location outside of the buffer.","createdAt":"2013-03-26T16:24:58","id":"843037372","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Reading 256 bytes with read(2) (which will read up to 256 bytes) will then trigger a write to a memory location outside of the buffer.\u003c/p>","isSpam":false,"isHighlighted":false,"points":1},{"parent":null,"likes":1,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Jun","url":"http://wisetravelsearch.com/","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"There are a couple of minor errors in the datagram version.  \n- address_length is declared twice in both client and server\n- for sendto of client2, there should not be '&' before address_length and there is an extra ')'.","createdAt":"2012-08-02T00:42:51","id":"606907819","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>There are a couple of minor errors in the datagram version.  \u003cbr>- address_length is declared twice in both client and server\u003cbr>- for sendto of client2, there should not be '&amp;' before address_length and there is an extra ')'.\u003c/p>","isSpam":false,"isHighlighted":false,"points":1},{"parent":606907819,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Chinasjtu","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"- for sendto of server2 (not client2), there should not be '&' before address_length and there is an extra ')'.","createdAt":"2012-08-15T06:04:06","id":"619782239","depth":1,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>- for sendto of server2 (not client2), there should not be '&amp;' before address_length and there is an extra ')'.\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":1,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"simonheffer","about":"","name":"simonheffer","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.232222,"profileUrl":"https://disqus.com/by/simonheffer/","reputation":1.232222,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2012-07-16T11:00:30","id":"29058299","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/simonheffer.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"isCustom":false,"permalink":"http://disqus.com/api/users/avatars/simonheffer.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png","large":{"permalink":"http://disqus.com/api/users/avatars/simonheffer.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Hi Thomas,\nWe\u2019ve made much use of your great article \u201cDemystifying Unix Domain Sockets\u201d and have had datagram sockets working well for a while now. However we did notice on one or two of our Solaris machines a number of socket files are left around. I\u2019m presuming this would happen if the application crashed before unlinking the file. In our case the window for this is quite small as its only there for the send/receive cycle. Do you know if the files would be left for other reasons or whether there\u2019s a particular issue on Solaris?\n\nSimon\n","createdAt":"2012-07-16T11:02:19","id":"589133030","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Hi Thomas,\u003cbr>We\u2019ve made much use of your great article \u201cDemystifying Unix Domain Sockets\u201d and have had datagram sockets working well for a while now. However we did notice on one or two of our Solaris machines a number of socket files are left around. I\u2019m presuming this would happen if the application crashed before unlinking the file. In our case the window for this is quite small as its only there for the send/receive cycle. Do you know if the files would be left for other reasons or whether there\u2019s a particular issue on Solaris?\u003c/p>\u003cp>Simon\u003cbr>\u003c/p>","isSpam":false,"isHighlighted":false,"points":1},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"atodorov","about":"","name":"atodorov","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.295075,"profileUrl":"https://disqus.com/by/atodorov/","reputation":1.295075,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2012-01-29T21:48:59","id":"21722697","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/atodorov.jpg","cache":"//a.disquscdn.com/uploads/users/2172/2697/avatar32.jpg?1424983961"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/atodorov.jpg","cache":"//a.disquscdn.com/uploads/users/2172/2697/avatar92.jpg?1424983961","large":{"permalink":"http://disqus.com/api/users/avatars/atodorov.jpg","cache":"//a.disquscdn.com/uploads/users/2172/2697/avatar92.jpg?1424983961"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Hi Thomas,\nabout Unix domain sockets you say:\n\n\"They are full duplex\"\n\n\nDo you mean SOCK_STREAM or SOCK_DGRAM (or any) type of UDS? Please clarify b/c I've not seen a DGRAM example which does read/write using a single socket. \n\n\n\nThanks!","createdAt":"2014-11-04T20:56:07","id":"1676469949","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Hi Thomas,\u003cbr>about Unix domain sockets you say:\u003c/p>\u003cp>\"They are full duplex\"\u003c/p>\u003cp>Do you mean SOCK_STREAM or SOCK_DGRAM (or any) type of UDS? Please clarify b/c I've not seen a DGRAM example which does read/write using a single socket.\u003c/p>\u003cp>Thanks!\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"profileUrl":"","isAnonymous":true,"name":"Guest","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/$70633382.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"isCustom":false,"permalink":"http://disqus.com/api/users/avatars/$70633382.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png","large":{"permalink":"http://disqus.com/api/users/avatars/$70633382.jpg","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"great article.","createdAt":"2014-02-11T13:48:49","id":"1239596227","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>great article.\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"disqus_Bwu1Tp6wAj","about":"","name":"sujay","disable3rdPartyTrackers":false,"url":"","isAnonymous":false,"rep":1.221096,"profileUrl":"https://disqus.com/by/disqus_Bwu1Tp6wAj/","reputation":1.221096,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2013-09-11T11:08:17","id":"72602199","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/disqus_Bwu1Tp6wAj.jpg","cache":"//a.disquscdn.com/uploads/users/7260/2199/avatar32.jpg?1421046531"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/disqus_Bwu1Tp6wAj.jpg","cache":"//a.disquscdn.com/uploads/users/7260/2199/avatar92.jpg?1421046531","large":{"permalink":"http://disqus.com/api/users/avatars/disqus_Bwu1Tp6wAj.jpg","cache":"//a.disquscdn.com/uploads/users/7260/2199/avatar92.jpg?1421046531"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"This is good reading.\nIs there a way we could prioritize the UDS socket processing.\nIf we use SO_PRIORITY in the socket creation, does it cause any effect.\nMy use case is 2 processes talking over two pairs of UDS, Need to prioritize \none socket over the other.\nRegds,\n-Sujay","createdAt":"2013-12-02T09:09:02","id":"1147102846","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>This is good reading.\u003cbr>Is there a way we could prioritize the UDS socket processing.\u003cbr>If we use SO_PRIORITY in the socket creation, does it cause any effect.\u003cbr>My use case is 2 processes talking over two pairs of UDS, Need to prioritize \u003cbr>one socket over the other.\u003cbr>Regds,\u003cbr>-Sujay\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Cunha Pp","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"hello. nice site! when i need that one program communicates whit multiple programs, how i can forward the data to the specific program?","createdAt":"2012-12-20T19:19:09","id":"743980663","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>hello. nice site! when i need that one program communicates whit multiple programs, how i can forward the data to the specific program?\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Chinasjtu","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"misspelling\uff1a\n1\nsince these socets are of type struct sockaddr_un.\nsince these sockets are of type struct sockaddr_un.\n2\nprintf(\"could obtain credentials from unix domain socket\");\nprintf(\"couldn't obtain credentials from unix domain socket\");","createdAt":"2012-08-15T05:44:30","id":"619769305","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>misspelling\uff1a\u003cbr>1\u003cbr>since these socets are of type struct sockaddr_un.\u003cbr>since these sockets are of type struct sockaddr_un.\u003cbr>2\u003cbr>printf(\"could obtain credentials from unix domain socket\");\u003cbr>printf(\"couldn't obtain credentials from unix domain socket\");\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"tstover","about":"Contract Software Engineer","name":"Thomas Stover","disable3rdPartyTrackers":false,"url":"http://www.thomasstover.com","isAnonymous":false,"rep":1.240645,"profileUrl":"https://disqus.com/by/tstover/","reputation":1.240645,"location":"Alabama","isPrivate":false,"isPrimary":true,"joinedAt":"2011-11-21T14:42:12","id":"19333562","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar32.jpg?1322021331"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331","large":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Congratulations for being the first disqus user to post something here. I just added this recently, pretty nifty lazy way of adding comments. anyway...\n\nyes that will work. The two line version is more explicit to emphasize what exactly the magic is. I'm also not sure how portable \\0 is, but if your on linux (since that is linux specific) you should be good to go. more articles in on their way...","createdAt":"2012-02-04T00:31:46","id":"429016995","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Congratulations for being the first disqus user to post something here. I just added this recently, pretty nifty lazy way of adding comments. anyway...\u003c/p>\u003cp>yes that will work. The two line version is more explicit to emphasize what exactly the magic is. I'm also not sure how portable \\0 is, but if your on linux (since that is linux specific) you should be good to go. more articles in on their way...\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":429016995,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"appalled","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"I posted a comment (including code that demonstrates the points I'll make here) to that \"micro-nit\" dude - pointing out that his suggested code doesn't work at all.  Shame on you (especially after such a great original posting and BTW thank you for that) for accepting it as valid without either 1) immediately knowing it was stupid code, or 2) integrating it into your code and finding out that it doesn't work at all!  But worse, your comment about \"I'm also not sure how portable \\0 is\" - until I saw that, I was thinking you were solid - but then you blew me outta the water w/that one!  The bottom line is that \\0 means the same thing EVERYWHERE in the C language when coded in a string or numeric constant - there's no issue about portability there -- nowhere no-how no-way.  Perhaps you should go look at the code in the C runtime library - even Microsoft provides it - and it works the same way in all C runtime libraries - it is a zero byte - aka STRING TERMINATOR.  And then look at how the compiler builds \"string constants\" - just to be thorough.  Nothing in the C RTL that deals with a \"string\" will copy any data after \\0 - nothing.  Notice that I'm not including things like \"memcpy\" or \"memmove\" here - they don't deal with strings - they deal with \"arrays of bytes\".  Semantically, in C, a \"string\" is \"an array of bytes terminated by a NUL\" - aka \\0 - always always always - never anything else - if it doesn't adhere to those semantics, then it's not a \"string\" - it's just an array of bytes and its \"length\" can't be meaningfully determined by \"strlen\" or any other \"string routine\".  snprintf, printf, strcpy, strcat, etc, are all routines that deal with strings.  Routines like memcpy, memmove, etc are NOT \"string routines\" - they require a separate \"length\" parameter to be passed in order for them to determine the length of the array(s) they're dealing with - whereas \"string routines\" just need a \"string pointer\" and they implicitly determine the length by the first occurrence of a \\0 character found in the array.\n\n\n","createdAt":"2012-03-06T02:12:09","id":"457385630","depth":1,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>I posted a comment (including code that demonstrates the points I'll make here) to that \"micro-nit\" dude - pointing out that his suggested code doesn't work at all.  Shame on you (especially after such a great original posting and BTW thank you for that) for accepting it as valid without either 1) immediately knowing it was stupid code, or 2) integrating it into your code and finding out that it doesn't work at all!  But worse, your comment about \"I'm also not sure how portable \\0 is\" - until I saw that, I was thinking you were solid - but then you blew me outta the water w/that one!  The bottom line is that \\0 means the same thing EVERYWHERE in the C language when coded in a string or numeric constant - there's no issue about portability there -- nowhere no-how no-way.  Perhaps you should go look at the code in the C runtime library - even Microsoft provides it - and it works the same way in all C runtime libraries - it is a zero byte - aka STRING TERMINATOR.  And then look at how the compiler builds \"string constants\" - just to be thorough.  Nothing in the C RTL that deals with a \"string\" will copy any data after \\0 - nothing.  Notice that I'm not including things like \"memcpy\" or \"memmove\" here - they don't deal with strings - they deal with \"arrays of bytes\".  Semantically, in C, a \"string\" is \"an array of bytes terminated by a NUL\" - aka \\0 - always always always - never anything else - if it doesn't adhere to those semantics, then it's not a \"string\" - it's just an array of bytes and its \"length\" can't be meaningfully determined by \"strlen\" or any other \"string routine\".  snprintf, printf, strcpy, strcat, etc, are all routines that deal with strings.  Routines like memcpy, memmove, etc are NOT \"string routines\" - they require a separate \"length\" parameter to be passed in order for them to determine the length of the array(s) they're dealing with - whereas \"string routines\" just need a \"string pointer\" and they implicitly determine the length by the first occurrence of a \\0 character found in the array.\u003c/p>\u003cp>\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":457385630,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"tstover","about":"Contract Software Engineer","name":"Thomas Stover","disable3rdPartyTrackers":false,"url":"http://www.thomasstover.com","isAnonymous":false,"rep":1.240645,"profileUrl":"https://disqus.com/by/tstover/","reputation":1.240645,"location":"Alabama","isPrivate":false,"isPrimary":true,"joinedAt":"2011-11-21T14:42:12","id":"19333562","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar32.jpg?1322021331"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331","large":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"still trying to get disqus to format my response correctly. see other thread shortly...","createdAt":"2012-03-06T16:56:57","id":"457916318","depth":2,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>still trying to get disqus to format my response correctly. see other thread shortly...\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":null,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"twitter-47352029","about":"","name":"Bruce Lueckenhoff","disable3rdPartyTrackers":false,"url":"http://twitter.com/Lueckenhoff","isAnonymous":false,"rep":1.2329599999999998,"profileUrl":"https://disqus.com/by/twitter-47352029/","reputation":1.2329599999999998,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2012-02-03T23:08:35","id":"21953391","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar32.jpg?1411867398"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398","large":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Thanks for a great article. Just one little micro-nit -- the lines\n    snprintf(address.sun_path, UNIX_PATH_MAX, \"#demo_socket\");\n    address.sun_path[0] = 0;\n\ncould be replaced by a single line:\n    snprintf(address.sun_path, UNIX_PATH_MAX, \"\\0demo_socket\");\n\nA little toy program verifies this:\n\n#include \u003cstdio.h>\nvoid hexdump (char *p, int siz)\n{\n    while (siz > 0) {\n        printf(\" %02X\", *p++);\n        --siz;\n    }\n    puts(\"\");\n}\nint main ()\n{\n\tchar name1[] = \"#demo_socket\";\n\tchar name2[] = \"\\0demo_socket\";\n\tname1[0] = 0;\n\tputs(\"name1:\");\n\thexdump(name1, sizeof(name1));\n\tputs(\"name2:\");\n\thexdump(name2, sizeof(name2));\n\treturn 0;\n}\n\noutput is:\n$ ./a.out \nname1:\n 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00\nname2:\n 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00\n$\n","createdAt":"2012-02-03T23:08:37","id":"428971337","depth":0,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Thanks for a great article. Just one little micro-nit -- the lines\u003cbr>    snprintf(address.sun_path, UNIX_PATH_MAX, \"#demo_socket\");\u003cbr>    address.sun_path[0] = 0;\u003c/p>\u003cp>could be replaced by a single line:\u003cbr>    snprintf(address.sun_path, UNIX_PATH_MAX, \"\\0demo_socket\");\u003c/p>\u003cp>A little toy program verifies this:\u003c/p>\u003cp>#include &lt;stdio.h&gt;\u003cbr>void hexdump (char *p, int siz)\u003cbr>{\u003cbr>    while (siz &gt; 0) {\u003cbr>        printf(\" %02X\", *p++);\u003cbr>        --siz;\u003cbr>    }\u003cbr>    puts(\"\");\u003cbr>}\u003cbr>int main ()\u003cbr>{\u003cbr>\tchar name1[] = \"#demo_socket\";\u003cbr>\tchar name2[] = \"\\0demo_socket\";\u003cbr>\tname1[0] = 0;\u003cbr>\tputs(\"name1:\");\u003cbr>\thexdump(name1, sizeof(name1));\u003cbr>\tputs(\"name2:\");\u003cbr>\thexdump(name2, sizeof(name2));\u003cbr>\treturn 0;\u003cbr>}\u003c/p>\u003cp>output is:\u003cbr>$ ./a.out \u003cbr>name1:\u003cbr> 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00\u003cbr>name2:\u003cbr> 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00\u003cbr>$\u003cbr>\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":428971337,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"appalled","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Your example shows nothing more than \"how to dump a buffer in hex given a pointer and a length\".  You've obviously missed the entire concept of what a \"string\" is in the C language - it's: \"an array of bytes terminated by a NUL character - aka \\0\".  In any case, your code does NOT work and is NOT a replacement for those two lines of Stover's code (shame on him for accepting your code as valid without testing it) - as the following example shows:\n\n#include \u003cstdio.h>\n#include \u003cstring.h>\n\nvoid\nhexdump(\n    char *msg,\n    void *pvbuf,\n    int len\n){\n    unsigned char *buf = pvbuf ;\n\n    printf(\"%s(%d):\",msg,len) ;\n    while (len-- > 0)  {\n        printf(\" %02X\",*buf++) ;\n    }\n    printf(\"\\n\") ;\n}\n\nint\nmain(){\n    char buf[32] ;\n\n    memset(buf,0xff,32) ;\n    snprintf(buf,sizeof buf,\"#abcdef\") ;\n    buf[0] = 0 ;\n    hexdump(\"buf\",buf,sizeof buf) ;\n\n    memset(buf,0xff,32) ;\n    snprintf(buf,sizeof buf,\"\\0abcdef\") ;\n    hexdump(\"buf\",buf,sizeof buf) ;\n\n    return(0) ;\n}\n","createdAt":"2012-03-05T22:56:20","id":"457255975","depth":1,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Your example shows nothing more than \"how to dump a buffer in hex given a pointer and a length\".  You've obviously missed the entire concept of what a \"string\" is in the C language - it's: \"an array of bytes terminated by a NUL character - aka \\0\".  In any case, your code does NOT work and is NOT a replacement for those two lines of Stover's code (shame on him for accepting your code as valid without testing it) - as the following example shows:\u003c/p>\u003cp>#include &lt;stdio.h&gt;\u003cbr>#include &lt;string.h&gt;\u003c/p>\u003cp>void\u003cbr>hexdump(\u003cbr>    char *msg,\u003cbr>    void *pvbuf,\u003cbr>    int len\u003cbr>){\u003cbr>    unsigned char *buf = pvbuf ;\u003c/p>\u003cp>    printf(\"%s(%d):\",msg,len) ;\u003cbr>    while (len-- &gt; 0)  {\u003cbr>        printf(\" %02X\",*buf++) ;\u003cbr>    }\u003cbr>    printf(\"\\n\") ;\u003cbr>}\u003c/p>\u003cp>int\u003cbr>main(){\u003cbr>    char buf[32] ;\u003c/p>\u003cp>    memset(buf,0xff,32) ;\u003cbr>    snprintf(buf,sizeof buf,\"#abcdef\") ;\u003cbr>    buf[0] = 0 ;\u003cbr>    hexdump(\"buf\",buf,sizeof buf) ;\u003c/p>\u003cp>    memset(buf,0xff,32) ;\u003cbr>    snprintf(buf,sizeof buf,\"\\0abcdef\") ;\u003cbr>    hexdump(\"buf\",buf,sizeof buf) ;\u003c/p>\u003cp>    return(0) ;\u003cbr>}\u003cbr>\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":457255975,"likes":2,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"tstover","about":"Contract Software Engineer","name":"Thomas Stover","disable3rdPartyTrackers":false,"url":"http://www.thomasstover.com","isAnonymous":false,"rep":1.240645,"profileUrl":"https://disqus.com/by/tstover/","reputation":1.240645,"location":"Alabama","isPrivate":false,"isPrimary":true,"joinedAt":"2011-11-21T14:42:12","id":"19333562","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar32.jpg?1322021331"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331","large":{"permalink":"http://disqus.com/api/users/avatars/tstover.jpg","cache":"//a.disquscdn.com/uploads/users/1933/3562/avatar92.jpg?1322021331"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"For those not following this, take a look at this subtle detail:\n\n\u003ccode>\nvoid hexdump(unsigned char *buffer, int length)\n{\n int x;\n printf(\"(%d bytes): \", length);\n\n for(x=0; x&lt;length; x++)\n {\n  printf(\"%x \", buffer[x]);\n }\n\n printf(\"\\n\") ;\n}\n\nint main(void)\n{\n char *buffer1, buffer2[9], buffer3[11];\n\n buffer1 = \"\\0ABCDEFG\";\n snprintf(buffer2, 9, \"\\0ABCDEFG\");\n\n memset(buffer3, 127, 11);\n snprintf(buffer3, 11, \"#ABCDEFG\");\n buffer3[0] = 0; /* or buffer3[0] = '\\0' */\n\n hexdump(buffer1, 9);\n hexdump(buffer2, 9);\n hexdump(buffer3, 11);\n\n return 0;\n}\noutput:\n(9 bytes): 0 41 42 43 44 45 46 47 0 \n(9 bytes): 0 0 0 0 0 0 0 0 90 \n(11 bytes): 0 41 42 43 44 45 46 47 0 7f 7f \n\u003c/code>\n\nWhat happened? First the escape sequence \\0 is used for NULL. Since we are using the \u201cnormal\u201d C and *nix style strings (ie not UTF-16 or UCS-2 \u201cwide strings\u201d) that means a single byte equal to 0. I don't like using \\0 because to me it leads to ambiguities. This is one of those cases. Technically the string literal \u201c\\0ABCDEFG\u201d has a single defined meaning \u2013 NULL character, followed by A \u2013 G, followed by the implied NULL termination character. Again the actual bytes that make up such a string depend on the platform we are working with. For instance, there is such a thing as C compilers for EBCDIC systems. So even if single byte characters are being used, these values could vary. Try to not let that confuse anyone, as that is a side issue entirely, and \\0 should always be 0 (NULL character). \n\nNext that same character sequence is used in the source three different places, in two different ways. The compiler's optimization scheme could generate code in at least two ways: it could create three static data sections for three different byte arrays or it could create one if it knows they are all the same. Either way that doesn't matter in this case. With buffer1 we say \u201ctake the address of this static data array and assign it to the pointer stored by buffer1\u201d. (Declaring the variable buffer1 as either char *buffer1, or char buffer1[] is yet another side issue that comes up in discussions of both text book / personal coding styles, and compiler implementation specific optimization hints. For this example's purposes we can say they are the same thing.) In the case of buffer2, the snprintf() library function is told to use the address of a static data array as the parameter for the format string argument. How does snprintf() know how long the format string is? For that matter how does snprintf() know the length of any strings it is given as parameters to %s format modifiers? It simply stops when it reaches a NULL termination - normally the implicit trailing NULL. \n\nOne reason I say that \\0 can lead to ambiguous source is that for the beginner this may not be obvious. One reason I say that \\0 may lead to portability issues is that you will (for good reason) get warnings on different tool chains. My gcc for instance issues a \u201cwarning: embedded \u2018\\0\u2019 in format\u201d. While that might not cause different runtime behavior, in the larger sense of portability it is an issue in my book. Besides, if someone has a reason to insert a \\0 in the middle of a string, that is an unusual thing, and I like the explicit attention given to it by the dedicated extra line, as in the case of buffer3. \n\nSo in Bruce's use case, it does work the way he has used it, although I have made my case against that coding style. His reason for the inclusion of a hex dump function I think was self explanatory in that it shows that string literal starting with \\0 is the same thing as a string literal with the first element explicitly set to 0.  \n\nAs 'appalled' fervently points out, in the case of using a string literal containing a \\0 as a format string does not work. Also he (I'm guessing it's a he), very validly, talks about the differences between byte or char arrays and \u201cstrings\u201d, as they are not always the same thing. In the case of the address.sun_path member of a sockaddr_un structure the specification of whether the value is to be a string or a char array itself is blurred. If it were true byte array, then the real length parameter would be needed. If it were a true string, then a leading 0 byte would not be allowed in the in the value. What it is instead is a hack to let an existing API accommodate a new feature, with the expressly defined condition of only the first byte being zero followed by legit NULL terminated string. This way on other systems the code would give the behaviorally expected result of failing from a NULL path name.\n\nbtw Posting this response revealed some serious limitations of disqus. Sorry if anyone got hit like 90 times with reply notificaitons.","createdAt":"2012-03-06T17:02:28","id":"457920450","depth":2,"numReports":0,"isDeleted":false,"isEdited":true,"message":"\u003cp>For those not following this, take a look at this subtle detail:\u003c/p>\u003cp>\u003ccode>\u003cbr>void hexdump(unsigned char *buffer, int length)\u003cbr>{\u003cbr> int x;\u003cbr> printf(\"(%d bytes): \", length);\u003cbr>\u003cbr> for(x=0; x&lt;length; x++)\u003cbr> {\u003cbr>  printf(\"%x \", buffer[x]);\u003cbr> }\u003cbr>\u003cbr> printf(\"\\n\") ;\u003cbr>}\u003cbr>\u003cbr>int main(void)\u003cbr>{\u003cbr> char *buffer1, buffer2[9], buffer3[11];\u003cbr>\u003cbr> buffer1 = \"\\0ABCDEFG\";\u003cbr> snprintf(buffer2, 9, \"\\0ABCDEFG\");\u003cbr>\u003cbr> memset(buffer3, 127, 11);\u003cbr> snprintf(buffer3, 11, \"#ABCDEFG\");\u003cbr> buffer3[0] = 0; /* or buffer3[0] = '\\0' */\u003cbr>\u003cbr> hexdump(buffer1, 9);\u003cbr> hexdump(buffer2, 9);\u003cbr> hexdump(buffer3, 11);\u003cbr>\u003cbr> return 0;\u003cbr>}\u003cbr>output:\u003cbr>(9 bytes): 0 41 42 43 44 45 46 47 0 \u003cbr>(9 bytes): 0 0 0 0 0 0 0 0 90 \u003cbr>(11 bytes): 0 41 42 43 44 45 46 47 0 7f 7f \u003cbr>\u003c/code>\u003c/p>\u003cp>What happened? First the escape sequence \\0 is used for NULL. Since we are using the \u201cnormal\u201d C and *nix style strings (ie not UTF-16 or UCS-2 \u201cwide strings\u201d) that means a single byte equal to 0. I don't like using \\0 because to me it leads to ambiguities. This is one of those cases. Technically the string literal \u201c\\0ABCDEFG\u201d has a single defined meaning \u2013 NULL character, followed by A \u2013 G, followed by the implied NULL termination character. Again the actual bytes that make up such a string depend on the platform we are working with. For instance, there is such a thing as C compilers for EBCDIC systems. So even if single byte characters are being used, these values could vary. Try to not let that confuse anyone, as that is a side issue entirely, and \\0 should always be 0 (NULL character).\u003c/p>\u003cp>Next that same character sequence is used in the source three different places, in two different ways. The compiler's optimization scheme could generate code in at least two ways: it could create three static data sections for three different byte arrays or it could create one if it knows they are all the same. Either way that doesn't matter in this case. With buffer1 we say \u201ctake the address of this static data array and assign it to the pointer stored by buffer1\u201d. (Declaring the variable buffer1 as either char *buffer1, or char buffer1[] is yet another side issue that comes up in discussions of both text book / personal coding styles, and compiler implementation specific optimization hints. For this example's purposes we can say they are the same thing.) In the case of buffer2, the snprintf() library function is told to use the address of a static data array as the parameter for the format string argument. How does snprintf() know how long the format string is? For that matter how does snprintf() know the length of any strings it is given as parameters to %s format modifiers? It simply stops when it reaches a NULL termination - normally the implicit trailing NULL.\u003c/p>\u003cp>One reason I say that \\0 can lead to ambiguous source is that for the beginner this may not be obvious. One reason I say that \\0 may lead to portability issues is that you will (for good reason) get warnings on different tool chains. My gcc for instance issues a \u201cwarning: embedded \u2018\\0\u2019 in format\u201d. While that might not cause different runtime behavior, in the larger sense of portability it is an issue in my book. Besides, if someone has a reason to insert a \\0 in the middle of a string, that is an unusual thing, and I like the explicit attention given to it by the dedicated extra line, as in the case of buffer3.\u003c/p>\u003cp>So in Bruce's use case, it does work the way he has used it, although I have made my case against that coding style. His reason for the inclusion of a hex dump function I think was self explanatory in that it shows that string literal starting with \\0 is the same thing as a string literal with the first element explicitly set to 0.\u003c/p>\u003cp>As 'appalled' fervently points out, in the case of using a string literal containing a \\0 as a format string does not work. Also he (I'm guessing it's a he), very validly, talks about the differences between byte or char arrays and \u201cstrings\u201d, as they are not always the same thing. In the case of the address.sun_path member of a sockaddr_un structure the specification of whether the value is to be a string or a char array itself is blurred. If it were true byte array, then the real length parameter would be needed. If it were a true string, then a leading 0 byte would not be allowed in the in the value. What it is instead is a hack to let an existing API accommodate a new feature, with the expressly defined condition of only the first byte being zero followed by legit NULL terminated string. This way on other systems the code would give the behaviorally expected result of failing from a NULL path name.\u003c/p>\u003cp>btw Posting this response revealed some serious limitations of disqus. Sorry if anyone got hit like 90 times with reply notificaitons.\u003c/p>","isSpam":false,"isHighlighted":false,"points":2},{"parent":457920450,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"name":"Denis","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar32.png","cache":"//a.disquscdn.com/1424976780/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1424976780/images/noavatar92.png","cache":"//a.disquscdn.com/1424976780/images/noavatar92.png"},"isAnonymous":true},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"That's a wired case, I wouldn't expect snprintf to pay any attention to the string after first \\0\nBut I would still make it one line, it's snprintf after all:\nsnprintf(address.sun_path, UNIX_PATH_MAX, \"%cdemo_socket\", 0);","createdAt":"2014-05-21T22:54:04","id":"1398547051","depth":3,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>That's a wired case, I wouldn't expect snprintf to pay any attention to the string after first \\0\u003cbr>But I would still make it one line, it's snprintf after all:\u003cbr>snprintf(address.sun_path, UNIX_PATH_MAX, \"%cdemo_socket\", 0);\u003c/p>","isSpam":false,"isHighlighted":false,"points":0},{"parent":457255975,"likes":1,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"twitter-47352029","about":"","name":"Bruce Lueckenhoff","disable3rdPartyTrackers":false,"url":"http://twitter.com/Lueckenhoff","isAnonymous":false,"rep":1.2329599999999998,"profileUrl":"https://disqus.com/by/twitter-47352029/","reputation":1.2329599999999998,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2012-02-03T23:08:35","id":"21953391","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar32.jpg?1411867398"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398","large":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"Mea culpa -- I agree, this was a terrible suggestion!\nEven if it did work reliably, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.\n","createdAt":"2012-11-28T23:03:14","id":"722023483","depth":2,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>Mea culpa -- I agree, this was a terrible suggestion!\u003cbr>Even if it did work reliably, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.\u003cbr>\u003c/p>","isSpam":false,"isHighlighted":false,"points":1},{"parent":457255975,"likes":0,"forum":"techdeviancy","thread":"480970755","isApproved":true,"author":{"username":"twitter-47352029","about":"","name":"Bruce Lueckenhoff","disable3rdPartyTrackers":false,"url":"http://twitter.com/Lueckenhoff","isAnonymous":false,"rep":1.2329599999999998,"profileUrl":"https://disqus.com/by/twitter-47352029/","reputation":1.2329599999999998,"location":"","isPrivate":false,"isPrimary":true,"joinedAt":"2012-02-03T23:08:35","id":"21953391","avatar":{"small":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar32.jpg?1411867398"},"isCustom":true,"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398","large":{"permalink":"http://disqus.com/api/users/avatars/twitter-47352029.jpg","cache":"//a.disquscdn.com/uploads/users/2195/3391/avatar92.jpg?1411867398"}}},"media":[],"isFlagged":false,"dislikes":0,"raw_message":"I agree, this was a terrible suggestion!\n\nEven if it did work, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.","createdAt":"2012-11-28T23:04:52","id":"722024406","depth":2,"numReports":0,"isDeleted":false,"isEdited":false,"message":"\u003cp>I agree, this was a terrible suggestion!\u003c/p>\u003cp>Even if it did work, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.\u003c/p>","isSpam":false,"isHighlighted":false,"points":0}],"thread":{"feed":"https://techdeviancy.disqus.com/tech_deviancy_demystifying_unix_domain_sockets/latest.rss","uploadAdd":"//techdeviancy.disqus.com/thread/tech_deviancy_demystifying_unix_domain_sockets/async_media_upload/","identifiers":[],"dislikes":0,"likes":7,"message":"","id":"480970755","isDeleted":false,"category":"1161180","clean_title":"Demystifying Unix Domain Sockets","userScore":0,"userSubscription":false,"signedLink":"http://disq.us/?url=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&key=9VCKbLSkQ71qzqSfBBRgrg","createdAt":"2011-11-23T03:53:11","hasStreaming":false,"uploadRemove":"//techdeviancy.disqus.com/thread/tech_deviancy_demystifying_unix_domain_sockets/async_media_remove/","raw_message":"","isClosed":false,"link":"http://www.thomasstover.com/uds.html","slug":"tech_deviancy_demystifying_unix_domain_sockets","forum":"techdeviancy","author":"19333562","posts":19,"moderators":[19333562],"title":"Tech Deviancy - Demystifying Unix Domain Sockets","highlightedPost":null}},"order":"popular"}</script>
+
+    
+
+    <div id="fixed-content"></div>
+
+    <script src="lounge.load.6fde8c6ec2e11497059794795c1cc70a.js" id="bootstrap-script" data-app="lounge"></script>
+
+
+<div id="layout" data-tracking-area="layout">
+
+<div id="discovery-top" data-tracking-area="discovery-north"></div>
+
+<div id="onboard" data-tracking-area="onboard"></div>
+
+<div id="highlighted-post" data-tracking-area="highlighted" class="highlighted-post" style="display: none;"></div>
+
+<header id="main-nav" data-tracking-area="main-nav">
+<nav class="nav nav-primary">
+<ul>
+<li class="tab-conversation active">
+<a href="https://disqus.com/home/discussions/techdeviancy/tech_deviancy_demystifying_unix_domain_sockets/" data-role="post-count" class="publisher-nav-color" data-nav="conversation"><span class="comment-count">
+19 comments
+</span>
+
+<span class="comment-count-placeholder">
+Comments
+</span>
+</a>
+</li>
+<li class="tab-community">
+<a href="https://disqus.com/home/forums/techdeviancy/" class="publisher-nav-color" data-action="community-sidebar" data-forum="techdeviancy" id="community-tab">
+<span class="community-name">
+<strong>Tech Deviancy</strong>
+
+</span>
+
+<strong class="community-name-placeholder">Community</strong>
+</a>
+</li>
+<li class="dropdown user-menu" data-role="logout"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="dropdown-toggle" data-toggle="dropdown">
+<span class="dropdown-toggle-wrapper">
+
+<span>
+Login
+</span>
+
+</span> <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+
+
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="auth:disqus">Disqus</a>
+</li>
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="auth:facebook">Facebook</a>
+</li>
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="auth:twitter">Twitter</a>
+</li>
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="auth:google">Google</a>
+</li>
+
+
+
+</ul>
+</li>
+<li class="notification-menu" data-role="notification-menu"><a href="https://disqus.com/home/inbox/" class="notification-container" data-nav="dashboard">
+<span class="notification-icon icon-comment"></span>
+<span class="notification-count" data-role="notification-count"></span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+
+
+
+<section id="conversation" data-role="main" data-tracking-area="main">
+<div class="nav nav-secondary" data-tracking-area="secondary-nav">
+<ul>
+<li data-role="post-sort" class="dropdown sorting">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="dropdown-toggle" data-nav="conversation" data-toggle="dropdown">
+Sort by Best
+
+
+<span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+<li class="selected">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="sort" data-sort="popular">Best<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="sort" data-sort="desc">Newest<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="sort" data-sort="asc">Oldest<i aria-hidden="true" class="icon-checkmark"></i></a>
+</li>
+</ul>
+</li>
+
+<li id="thread-share-menu" class="dropdown share-menu">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="dropdown-toggle" data-toggle="dropdown" title="Share">
+<span class="icon-export"></span>
+<span class="label">Share</span>
+</a>
+<ul class="share-menu dropdown-menu pull-right">
+<li class="share">Share this discussion on
+<ul>
+<li class="twitter">
+<a data-action="share:twitter" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#">Twitter</a>
+</li>
+<li class="facebook">
+<a data-action="share:facebook" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#">Facebook</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li id="thread-votes" class="recommend pull-right">
+<!-- rendered dynamically -->
+<div class="thread-likes" data-role="vote-button"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="upvote" title="Recommend this discussion">
+<span class="icon-heart"></span>
+<span class="label label-default">Recommend</span>
+<span class="label label-recommended">Recommended</span>
+</a>
+</div></li>
+</ul>
+</div>
+
+<div id="posts">
+<div id="form"><form class="reply">
+<div class="postbox">
+<div role="alert"></div>
+<div class="avatar">
+<span class="user">
+<img data-role="user-avatar" src="noavatar92.b677f9ddbee6f4bb22f473ae3bd61b85.png" alt="Avatar">
+</span>
+</div>
+
+<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div class="textarea" tabindex="0" role="textbox" aria-multiline="true" contenteditable="true" data-role="editable" aria-label="Join the discussion…" style="overflow: auto; max-height: 350px;"><p><br></p></div><div style="display: none;"><ul class="suggestions">
+<li class="header">
+<h5>in this conversation</h5>
+</li>
+</ul>
+</div></div>
+<div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+<div class="drag-text">
+⬇ Drag and drop your images here to upload them.
+</div>
+</div>
+<div class="media-preview empty" data-role="media-preview">
+<ul data-role="media-legacy-list"></ul>
+<ul data-role="media-progress-list"></ul>
+<ul data-role="media-rich-list"></ul>
+<div class="media-expanded empty" data-role="media-preview-expanded">
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-role="media-preview-expanded-image" alt="Media preview placeholder">
+</div>
+</div>
+<div class="edit-alert" role="postbox-alert"></div>
+<div class="post-actions">
+<ul class="wysiwyg">
+<li>
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" tabindex="-1" data-action="attach" class="attach" title="Upload Images"><span>Attach</span></a>
+<input type="file" data-role="media-upload" tabindex="-1" class="regular" accept="image/*">
+</li>
+</ul>
+</div>
+</div>
+
+<div data-role="login-form"><div><section class="auth-section logged-out">
+<div class="connect">
+<h6>Sign in with</h6>
+<ul data-role="login-menu" class="services login-buttons">
+
+
+<li class="auth-disqus">
+<button type="button" data-action="auth:disqus" title="Disqus"><i class="icon-disqus"></i></button>
+</li>
+<li class="auth-facebook">
+<button type="button" data-action="auth:facebook" title="Facebook"><i class="icon-facebook-circle"></i></button>
+</li>
+<li class="auth-twitter">
+<button type="button" data-action="auth:twitter" title="Twitter"><i class="icon-twitter-circle"></i></button>
+</li>
+<li class="auth-google">
+<button type="button" data-action="auth:google" title="Google"><i class="icon-google-plus-circle"></i></button>
+</li>
+</ul>
+</div>
+<div class="guest">
+<h6 class="guest-form-title">
+or pick a name
+</h6>
+
+<div class="what-is-disqus help-icon">
+<div id="rules" class="tooltip show">
+<h3>Disqus is a conversation network</h3>
+<ul>
+<li><span>Disqus never moderates or censors. The rules on this community are its own.</span></li>
+<li><span>Your email is safe with us. It's only used for moderation and optional notifications.</span></li>
+<li><span>Don't be a jerk or do anything illegal. Everything is easier that way.</span></li>
+</ul>
+<p class="clearfix"><a href="https://docs.disqus.com/kb/terms-and-policies/" class="btn btn-small" target="_blank">Read full terms and conditions</a></p>
+</div>
+</div>
+
+<p class="input-wrapper">
+<input dir="auto" type="text" placeholder="Name" name="display_name" id="view164_display_name" maxlength="30">
+</p>
+
+<div class="guest-details " data-role="guest-details">
+<p class="input-wrapper">
+<input dir="auto" type="email" placeholder="Email" name="email" id="view164_email">
+</p>
+
+<p class="input-wrapper">
+<input dir="auto" type="password" placeholder="Password" name="password" id="view164_password">
+</p>
+<div class="guest-checkbox">
+<label>
+<input type="checkbox" name="author-guest">
+I'd rather post as guest
+</label>
+</div>
+</div>
+</div>
+<div class="proceed">
+<button type="submit" class="btn submit" aria-label="Post"><span class="icon-proceed"></span></button>
+<button type="submit" class="btn next" aria-label="Next"><span class="icon-proceed"></span></button>
+</div>
+</section>
+
+</div></div>
+</div>
+</form></div>
+
+<button class="alert realtime" style="display: none;" data-role="realtime-notification">
+</button>
+
+<div id="no-posts" style="display: none;">Be the first to comment.</div>
+
+<ul id="post-list" class="post-list"><li class="post" id="post-990903341"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Torkel Bjørnson-Langen</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-990903341" data-role="relative-time" class="time-ago" title="Wednesday, August 7, 2013 6:13 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Greetings from Norway,</p><p>Nice resource. It really got me started with Unix sockets.</p><p>But I think I found a bug. At line 61-63 in server1.c accept() is called, but the variable address_length is used uninitialized. The manual page of accept() says this: (It's initialized in server2.c, but there it's defined twice!)</p><p>  The addrlen argument is a value-result argument: the caller must<br>  initialize it to contain the size (in bytes) of the structure<br>  pointed to by addr; on return it will contain the actual size of<br>  the peer address.</p><p>And I found it slightly confusing that you reuse the server address structure, since the address returned by accept() is for the peer. So why not just pass NULL since the example don't use the result?</p><p>Keep up the god work!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-4" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">4</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-990903341">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:990903341">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-843037372"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">a friend</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-843037372" data-role="relative-time" class="time-ago" title="Tuesday, March 26, 2013 9:54 PM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Reading 256 bytes with read(2) (which will read up to 256 bytes) will then trigger a write to a memory location outside of the buffer.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-1" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-843037372">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:843037372">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-606907819"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Jun</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-606907819" data-role="relative-time" class="time-ago" title="Thursday, August 2, 2012 6:12 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>There are a couple of minor errors in the datagram version.  <br>- address_length is declared twice in both client and server<br>- for sendto of client2, there should not be '&amp;' before address_length and there is an extra ')'.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-1" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-606907819">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:606907819">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-619782239"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Chinasjtu</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-606907819" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Jun</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-619782239" data-role="relative-time" class="time-ago" title="Wednesday, August 15, 2012 11:34 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>- for sendto of server2 (not client2), there should not be '&amp;' before address_length and there is an extra ')'.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-619782239">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:619782239">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li></ul>
+
+</li><li class="post" id="post-589133030"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/simonheffer/" class="user" data-action="profile" data-username="simonheffer" data-user="29058299">
+<img data-role="user-avatar" data-user="29058299" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/simonheffer/" data-action="profile" data-user="29058299" data-username="simonheffer" data-role="username">simonheffer</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-589133030" data-role="relative-time" class="time-ago" title="Monday, July 16, 2012 4:32 PM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Thomas,<br>We’ve made much use of your great article “Demystifying Unix Domain Sockets” and have had datagram sockets working well for a while now. However we did notice on one or two of our Solaris machines a number of socket files are left around. I’m presuming this would happen if the application crashed before unlinking the file. In our case the window for this is quite small as its only there for the send/receive cycle. Do you know if the files would be left for other reasons or whether there’s a particular issue on Solaris?</p><p>Simon<br></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-1" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-589133030">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:589133030">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-1676469949"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/atodorov/" class="user" data-action="profile" data-username="atodorov" data-user="21722697">
+<img data-role="user-avatar" data-user="21722697" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/atodorov/" data-action="profile" data-user="21722697" data-username="atodorov" data-role="username">atodorov</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-1676469949" data-role="relative-time" class="time-ago" title="Wednesday, November 5, 2014 2:26 AM">
+4 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Thomas,<br>about Unix domain sockets you say:</p><p>"They are full duplex"</p><p>Do you mean SOCK_STREAM or SOCK_DGRAM (or any) type of UDS? Please clarify b/c I've not seen a DGRAM example which does read/write using a single socket.</p><p>Thanks!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-1676469949">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1676469949">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-1239596227"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Guest</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-1239596227" data-role="relative-time" class="time-ago" title="Tuesday, February 11, 2014 7:18 PM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>great article.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-1239596227">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1239596227">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-1147102846"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_Bwu1Tp6wAj/" class="user" data-action="profile" data-username="disqus_Bwu1Tp6wAj" data-user="72602199">
+<img data-role="user-avatar" data-user="72602199" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_Bwu1Tp6wAj/" data-action="profile" data-user="72602199" data-username="disqus_Bwu1Tp6wAj" data-role="username">sujay</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-1147102846" data-role="relative-time" class="time-ago" title="Monday, December 2, 2013 2:39 PM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>This is good reading.<br>Is there a way we could prioritize the UDS socket processing.<br>If we use SO_PRIORITY in the socket creation, does it cause any effect.<br>My use case is 2 processes talking over two pairs of UDS, Need to prioritize <br>one socket over the other.<br>Regds,<br>-Sujay</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-1147102846">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1147102846">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-743980663"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Cunha Pp</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-743980663" data-role="relative-time" class="time-ago" title="Friday, December 21, 2012 12:49 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>hello. nice site! when i need that one program communicates whit multiple programs, how i can forward the data to the specific program?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-743980663">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:743980663">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-619769305"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Chinasjtu</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-619769305" data-role="relative-time" class="time-ago" title="Wednesday, August 15, 2012 11:14 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>misspelling：<br>1<br>since these socets are of type struct sockaddr_un.<br>since these sockets are of type struct sockaddr_un.<br>2<br>printf("could obtain credentials from unix domain socket");<br>printf("couldn't obtain credentials from unix domain socket");</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-619769305">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:619769305">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-429016995"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/tstover/" class="user" data-action="profile" data-username="tstover" data-user="19333562">
+<img data-role="user-avatar" data-user="19333562" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/tstover/" data-action="profile" data-user="19333562" data-username="tstover" data-role="username">Thomas Stover</a></span>
+<span class="badge moderator">Mod</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-429016995" data-role="relative-time" class="time-ago" title="Saturday, February 4, 2012 6:01 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Congratulations for being the first disqus user to post something here. I just added this recently, pretty nifty lazy way of adding comments. anyway...</p><p>yes that will work. The two line version is more explicit to emphasize what exactly the magic is. I'm also not sure how portable \0 is, but if your on linux (since that is linux specific) you should be good to go. more articles in on their way...</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-429016995">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:429016995">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-457385630"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">appalled</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-429016995" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Thomas Stover</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-457385630" data-role="relative-time" class="time-ago" title="Tuesday, March 6, 2012 7:42 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I posted a comment (including code that demonstrates the points I'll make here) to that "micro-nit" dude - pointing out that his suggested code doesn't work at all.  Shame on you (especially after such a great original posting and BTW thank you for that) for accepting it as valid without either 1) immediately knowing it was stupid code, or 2) integrating it into your code and finding out that it doesn't work at all!  But worse, your comment about "I'm also not sure how portable \0 is" - until I saw that, I was thinking you were solid - but then you blew me outta the water w/that one!  The bottom line is that \0 means the same thing EVERYWHERE in the C language when coded in a string or numeric constant - there's no issue about portability there -- nowhere no-how no-way.  Perhaps you should go look at the code in the C runtime library - even Microsoft provides it - and it works the same way in all C runtime libraries - it is a zero byte - aka STRING TERMINATOR.  And then look at how the compiler builds "string constants" - just to be thorough.  Nothing in the C RTL that deals with a "string" will copy any data after \0 - nothing.  Notice that I'm not including things like "memcpy" or "memmove" here - they don't deal with strings - they deal with "arrays of bytes".  Semantically, in C, a "string" is "an array of bytes terminated by a NUL" - aka \0 - always always always - never anything else - if it doesn't adhere to those semantics, then it's not a "string" - it's just an array of bytes and its "length" can't be meaningfully determined by "strlen" or any other "string routine".  snprintf, printf, strcpy, strcat, etc, are all routines that deal with strings.  Routines like memcpy, memmove, etc are NOT "string routines" - they require a separate "length" parameter to be passed in order for them to determine the length of the array(s) they're dealing with - whereas "string routines" just need a "string pointer" and they implicitly determine the length by the first occurrence of a \0 character found in the array.</p><p></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-457385630">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:457385630">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-457916318"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/tstover/" class="user" data-action="profile" data-username="tstover" data-user="19333562">
+<img data-role="user-avatar" data-user="19333562" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/tstover/" data-action="profile" data-user="19333562" data-username="tstover" data-role="username">Thomas Stover</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-457385630" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> appalled</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-457916318" data-role="relative-time" class="time-ago" title="Tuesday, March 6, 2012 10:26 PM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>still trying to get disqus to format my response correctly. see other thread shortly...</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-457916318">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:457916318">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li></ul>
+
+</li></ul>
+
+</li><li class="post" id="post-428971337"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/twitter-47352029/" class="user" data-action="profile" data-username="twitter-47352029" data-user="21953391">
+<img data-role="user-avatar" data-user="21953391" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/twitter-47352029/" data-action="profile" data-user="21953391" data-username="twitter-47352029" data-role="username">Bruce Lueckenhoff</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-428971337" data-role="relative-time" class="time-ago" title="Saturday, February 4, 2012 4:38 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container" style="height: 374px;">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks for a great article. Just one little micro-nit -- the lines<br>    snprintf(address.sun_path, UNIX_PATH_MAX, "#demo_socket");<br>    address.sun_path[0] = 0;</p><p>could be replaced by a single line:<br>    snprintf(address.sun_path, UNIX_PATH_MAX, "\0demo_socket");</p><p>A little toy program verifies this:</p><p>#include &lt;stdio.h&gt;<br>void hexdump (char *p, int siz)<br>{<br>    while (siz &gt; 0) {<br>        printf(" %02X", *p++);<br>        --siz;<br>    }<br>    puts("");<br>}<br>int main ()<br>{<br>	char name1[] = "#demo_socket";<br>	char name2[] = "\0demo_socket";<br>	name1[0] = 0;<br>	puts("name1:");<br>	hexdump(name1, sizeof(name1));<br>	puts("name2:");<br>	hexdump(name2, sizeof(name2));<br>	return 0;<br>}</p><p>output is:<br>$ ./a.out <br>name1:<br> 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00<br>name2:<br> 00 64 65 6D 6F 5F 73 6F 63 6B 65 74 00<br>$<br></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-428971337">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:428971337">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-457255975"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">appalled</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-428971337" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Bruce Lueckenhoff</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-457255975" data-role="relative-time" class="time-ago" title="Tuesday, March 6, 2012 4:26 AM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container" style="height: 374px;">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Your example shows nothing more than "how to dump a buffer in hex given a pointer and a length".  You've obviously missed the entire concept of what a "string" is in the C language - it's: "an array of bytes terminated by a NUL character - aka \0".  In any case, your code does NOT work and is NOT a replacement for those two lines of Stover's code (shame on him for accepting your code as valid without testing it) - as the following example shows:</p><p>#include &lt;stdio.h&gt;<br>#include &lt;string.h&gt;</p><p>void<br>hexdump(<br>    char *msg,<br>    void *pvbuf,<br>    int len<br>){<br>    unsigned char *buf = pvbuf ;</p><p>    printf("%s(%d):",msg,len) ;<br>    while (len-- &gt; 0)  {<br>        printf(" %02X",*buf++) ;<br>    }<br>    printf("\n") ;<br>}</p><p>int<br>main(){<br>    char buf[32] ;</p><p>    memset(buf,0xff,32) ;<br>    snprintf(buf,sizeof buf,"#abcdef") ;<br>    buf[0] = 0 ;<br>    hexdump("buf",buf,sizeof buf) ;</p><p>    memset(buf,0xff,32) ;<br>    snprintf(buf,sizeof buf,"\0abcdef") ;<br>    hexdump("buf",buf,sizeof buf) ;</p><p>    return(0) ;<br>}<br></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-457255975">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:457255975">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-457920450"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/tstover/" class="user" data-action="profile" data-username="tstover" data-user="19333562">
+<img data-role="user-avatar" data-user="19333562" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/tstover/" data-action="profile" data-user="19333562" data-username="tstover" data-role="username">Thomas Stover</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-457255975" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> appalled</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-457920450" data-role="relative-time" class="time-ago" title="Tuesday, March 6, 2012 10:32 PM">
+3 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container" style="height: 374px;">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>For those not following this, take a look at this subtle detail:</p><p><code><br>void hexdump(unsigned char *buffer, int length)<br>{<br> int x;<br> printf("(%d bytes): ", length);<br><br> for(x=0; x&lt;length; x++)<br> {<br>  printf("%x ", buffer[x]);<br> }<br><br> printf("\n") ;<br>}<br><br>int main(void)<br>{<br> char *buffer1, buffer2[9], buffer3[11];<br><br> buffer1 = "\0ABCDEFG";<br> snprintf(buffer2, 9, "\0ABCDEFG");<br><br> memset(buffer3, 127, 11);<br> snprintf(buffer3, 11, "#ABCDEFG");<br> buffer3[0] = 0; /* or buffer3[0] = '\0' */<br><br> hexdump(buffer1, 9);<br> hexdump(buffer2, 9);<br> hexdump(buffer3, 11);<br><br> return 0;<br>}<br>output:<br>(9 bytes): 0 41 42 43 44 45 46 47 0 <br>(9 bytes): 0 0 0 0 0 0 0 0 90 <br>(11 bytes): 0 41 42 43 44 45 46 47 0 7f 7f <br></code></p><p>What happened? First the escape sequence \0 is used for NULL. Since we are using the “normal” C and *nix style strings (ie not UTF-16 or UCS-2 “wide strings”) that means a single byte equal to 0. I don't like using \0 because to me it leads to ambiguities. This is one of those cases. Technically the string literal “\0ABCDEFG” has a single defined meaning – NULL character, followed by A – G, followed by the implied NULL termination character. Again the actual bytes that make up such a string depend on the platform we are working with. For instance, there is such a thing as C compilers for EBCDIC systems. So even if single byte characters are being used, these values could vary. Try to not let that confuse anyone, as that is a side issue entirely, and \0 should always be 0 (NULL character).</p><p>Next that same character sequence is used in the source three different places, in two different ways. The compiler's optimization scheme could generate code in at least two ways: it could create three static data sections for three different byte arrays or it could create one if it knows they are all the same. Either way that doesn't matter in this case. With buffer1 we say “take the address of this static data array and assign it to the pointer stored by buffer1”. (Declaring the variable buffer1 as either char *buffer1, or char buffer1[] is yet another side issue that comes up in discussions of both text book / personal coding styles, and compiler implementation specific optimization hints. For this example's purposes we can say they are the same thing.) In the case of buffer2, the snprintf() library function is told to use the address of a static data array as the parameter for the format string argument. How does snprintf() know how long the format string is? For that matter how does snprintf() know the length of any strings it is given as parameters to %s format modifiers? It simply stops when it reaches a NULL termination - normally the implicit trailing NULL.</p><p>One reason I say that \0 can lead to ambiguous source is that for the beginner this may not be obvious. One reason I say that \0 may lead to portability issues is that you will (for good reason) get warnings on different tool chains. My gcc for instance issues a “warning: embedded ‘\0’ in format”. While that might not cause different runtime behavior, in the larger sense of portability it is an issue in my book. Besides, if someone has a reason to insert a \0 in the middle of a string, that is an unusual thing, and I like the explicit attention given to it by the dedicated extra line, as in the case of buffer3.</p><p>So in Bruce's use case, it does work the way he has used it, although I have made my case against that coding style. His reason for the inclusion of a hex dump function I think was self explanatory in that it shows that string literal starting with \0 is the same thing as a string literal with the first element explicitly set to 0.</p><p>As 'appalled' fervently points out, in the case of using a string literal containing a \0 as a format string does not work. Also he (I'm guessing it's a he), very validly, talks about the differences between byte or char arrays and “strings”, as they are not always the same thing. In the case of the address.sun_path member of a sockaddr_un structure the specification of whether the value is to be a string or a char array itself is blurred. If it were true byte array, then the real length parameter would be needed. If it were a true string, then a leading 0 byte would not be allowed in the in the value. What it is instead is a hack to let an existing API accommodate a new feature, with the expressly defined condition of only the first byte being zero followed by legit NULL terminated string. This way on other systems the code would give the behaviorally expected result of failing from a NULL path name.</p><p>btw Posting this response revealed some serious limitations of disqus. Sorry if anyone got hit like 90 times with reply notificaitons.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-2" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">2</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-457920450">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:457920450">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-1398547051"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author">Denis</span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-457920450" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Thomas Stover</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-1398547051" data-role="relative-time" class="time-ago" title="Thursday, May 22, 2014 4:24 AM">
+9 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>That's a wired case, I wouldn't expect snprintf to pay any attention to the string after first \0<br>But I would still make it one line, it's snprintf after all:<br>snprintf(address.sun_path, UNIX_PATH_MAX, "%cdemo_socket", 0);</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-1398547051">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1398547051">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li></ul>
+
+</li><li class="post" id="post-722023483"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/twitter-47352029/" class="user" data-action="profile" data-username="twitter-47352029" data-user="21953391">
+<img data-role="user-avatar" data-user="21953391" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/twitter-47352029/" data-action="profile" data-user="21953391" data-username="twitter-47352029" data-role="username">Bruce Lueckenhoff</a></span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-457255975" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> appalled</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-722023483" data-role="relative-time" class="time-ago" title="Thursday, November 29, 2012 4:33 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Mea culpa -- I agree, this was a terrible suggestion!<br>Even if it did work reliably, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.<br></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-1" data-action="upvote" title="">
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-722023483">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:722023483">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li><li class="post" id="post-722024406"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/twitter-47352029/" class="user" data-action="profile" data-username="twitter-47352029" data-user="21953391">
+<img data-role="user-avatar" data-user="21953391" src="noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header>
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/twitter-47352029/" data-action="profile" data-user="21953391" data-username="twitter-47352029" data-role="username">Bruce Lueckenhoff</a></span>
+
+<span><a href="http://www.thomasstover.com/uds.html#comment-457255975" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> appalled</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.thomasstover.com/uds.html#comment-722024406" data-role="relative-time" class="time-ago" title="Thursday, November 29, 2012 4:34 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I agree, this was a terrible suggestion!</p><p>Even if it did work, such a changes loses the nice, self-documenting quality of the original, in pointing out the magic/weirdness of having a 0 byte at the beginning of the name.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer>
+<menu>
+
+<li class="voting" data-role="voting">
+<span role="button" class="vote-up  count-0" data-action="upvote" title="Vote up">
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+<span class="tooltip">You must sign in to up-vote this post.</span>
+</span>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+<span class="tooltip">You must sign in to down-vote this post.</span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="reply">
+<i class="icon icon-mobile icon-reply"></i><span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="share">
+<a class="toggle"><i class="icon icon-mobile icon-share"></i><span class="text">Share ›</span></a>
+<ul>
+<li class="twitter"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:twitter">Twitter</a></li>
+<li class="facebook"><a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="share:facebook">Facebook</a></li>
+<li class="link"><a href="http://www.thomasstover.com/uds.html#comment-722024406">Link</a></li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:722024406">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" class="btn btn-small"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+
+</li></ul>
+
+</li></ul>
+
+</li></ul>
+
+<div class="load-more" data-role="more" style="display: none;">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" data-action="more-posts" class="btn">Load more comments</a>
+</div>
+</div>
+
+</section>
+
+<section id="dashboard" style="display:none" data-role="main" data-tracking-area="main">
+<p style="line-height: 1.4">Nothing for you here ... yet. But as you comment with Disqus and follow
+other Disqus users, you will start to receive notifications here, as well as a personalized
+feed of activity by you and the people you follow. So get out there and participate in
+some discussions!</p>
+</section>
+
+<section id="profile" style="display:none" data-role="main" data-tracking-area="main">
+</section>
+
+<div id="discovery" data-tracking-area="discovery-south"></div>
+
+<div id="footer" data-tracking-area="footer">
+<ul>
+<li class="logo"><a href="https://disqus.com/" rel="nofollow" title="Powered by Disqus">Powered by Disqus</a></li>
+<li id="thread-subscribe-button" class="email"> 
+<div class="default">
+<a href="http://disqus.com/embed/comments/?base=default&version=6fde8c6ec2e11497059794795c1cc70a&f=techdeviancy&t_u=http%3A%2F%2Fwww.thomasstover.com%2Fuds.html&t_d=Demystifying%20Unix%20Domain%20Sockets&t_t=Demystifying%20Unix%20Domain%20Sockets&s_o=default#" rel="nofollow" data-action="subscribe" title="Subscribe and get email updates from this discussion"><i aria-hidden="true" class="icon-mail"></i><span class="clip">Subscribe</span> <i aria-hidden="true" class="icon-checkmark"></i></a>
+</div>
+<div class="form">
+<div class="input-wrapper"><input id="thread-subscribe-email" type="email" placeholder="yourname@email.com"></div>
+</div>
+</li>
+<li class="install">
+<a href="https://disqus.com/websites/?utm_source=techdeviancy&utm_medium=Disqus-Footer" rel="nofollow" target="_blank">
+<i aria-hidden="true" class="icon-disqus"></i>
+<span class="clip">Add Disqus to your site</span>
+</a>
+</li>
+<li class="privacy">
+<a href="https://help.disqus.com/customer/portal/articles/1657951?utm_source=disqus&utm_medium=embed-footer&utm_content=privacy-btn" rel="nofollow" target="_blank">
+<i aria-hidden="true" class="icon-privacy"></i>
+<span class="clip">Privacy</span>
+</a>
+</li>
+</ul>
+</div>
+</div></body></html>

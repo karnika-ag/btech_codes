@@ -1,0 +1,56 @@
+
+// lex file: conv.l
+
+%{
+    #include<stdio.h>
+    int num,r,digit=0,count,pcount=0,i;
+    char a[20];
+%}
+DIGIT [0-9]
+
+%%
+
+{DIGIT}+ {    num=atoi(yytext);
+        while(num!=0)
+        {
+            r=num%16;
+            digit='0'+r;
+            if(digit>'9')
+            digit+=7;
+            a[count++]=digit;
+            num=num/16;
+        }
+        for(i=count-1;i>=pcount;--i)
+                printf("%c",a[i]);
+                pcount=count;
+        }
+.|\n    ECHO;
+        
+%%
+main()
+{
+    yylex();
+    return 0;
+}      
+
+Output:
+nn@linuxmint ~ $ lex conv.l
+nn@linuxmint ~ $ gcc lex.yy.c -lfl
+nn@linuxmint ~ $ ./a.out<c.txt
+DEEPAK A
+F HUNAIF
+NAVITHA 10
+15 RAJINA 
+ABID 18
+1A SANITHA
+nn@linuxmint ~ $
+
+
+// c.txt 
+
+DEEPAK 10
+15 HUNAIF
+NAVITHA 16
+21 RAJINA 
+ABID 24
+26 SANITH

@@ -1,0 +1,45 @@
+void main()
+{
+	int a,b,c,d,s,r,p,q,h,w,res;
+        w=p||q&&h;
+        if(a>b)
+        {
+          b=a+c;
+        } 
+        if(b==a)
+        {
+        s=r;
+        }
+        else
+        {
+         if(p>q)
+           w=s;
+         else
+         h=b;
+        }
+       while(a+b*c)
+	{
+		if(a||b&&c)
+		a=b;
+		else
+		c=d;
+		d=p*q+c*(a+b);
+		q=r;
+	}
+	while(b+d)
+	{
+      switch(a+b)
+      {
+      case 1: b=c;
+      break;
+      case 2: s=p*q; 
+      break;
+      case 3: p=q;               
+      //break;
+      default: a=b+c;
+      //break;
+      }
+      }
+      a=b@c@d; 	
+      
+}

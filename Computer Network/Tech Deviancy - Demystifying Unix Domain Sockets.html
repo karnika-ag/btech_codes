@@ -1,0 +1,1207 @@
+
+<!-- saved from url=(0036)http://www.thomasstover.com/uds.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+  <title>Tech Deviancy - Demystifying Unix Domain Sockets</title>
+ <script type="text/javascript" async="" src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/embed.js"></script><style type="text/css"></style><link rel="stylesheet" type="text/css" href="chrome-extension://neomigpibafpboiknmijddgnncengfnm/css/divpop.css"></head>
+
+ <body bgcolor="#000000" link="#06004d" vlink="#06004d" alink="#06004d" text="#000000">
+
+  <table align="center" cellpadding="20">
+   <tbody><tr>
+    <td valign="top" align="center">
+     <a href="http://www.thomasstover.com/index.html"><img src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/td.gif" alt="TECH DEVIANCY"></a><table cellpadding="10" cellspacing="0">
+      <tbody><tr>
+
+        
+        <td background="./Tech Deviancy - Demystifying Unix Domain Sockets_files/bg3.jpg" width="880">
+
+
+
+
+
+
+
+
+  <p align="right"><i>last updated</i>, <b>November 11, 2011</b></p>
+
+  <h1 align="center">Demystifying Unix Domain Sockets</h1>
+
+  <hr align="center" color="black" width="60%">
+  <p align="center">originally written in February 2006</p>
+  <hr align="center" color="black" width="60%">
+
+  <h3>"Unix Domain Sockets? - I've Heard of Those Before"</h3>
+  <p>The often overlooked Unix domain socket facility is one of the
+     most powerful features in any modern Unix. Most socket programing 
+     books for Unix discus the topic merely in an academic sense
+     without ever explaining why it matters or what it is used for.
+     Besides being the only way utilize certain abilities of the
+     operating system, it is an area programers new to Linux, BSD, and
+     other Unices definitely need to be aware of. This is not a tutorial
+     on sockets, rather a review of the features and benefits of one area
+     of sockets programming. 
+  </p>
+  
+  <h3>Background and Context</h3>
+  <p>
+    Unix domain sockets are sometimes called "local" sockets. 
+    This can be misleading as it implies that it has something to do with a 
+    loopback adapter.
+    The closest thing to a Unix domain socket would be a pipe. Unix pipes are
+    an integral cornerstone of the OS at large. Analogous to a water pipe with
+    water flowing in one direction, a stream of bytes flows from the write
+    side of a pipe to the read side. A separate open file descriptor maintains a 
+    reference to the read and write side of a pipe. The different sides of the
+    pipe can be in different processes or threads as long as they reside on the 
+    same local computer. Let us review the distinguishing characteristics of pipes
+    in Unix.</p>
+  <ul>
+    <li>Writes less than 4kb are atomic</li>
+    <li>Pipes can be created and inherited across a <b>fork</b>() call, as well as shared between threads.</li>
+    <li>Pipes can also be given a name in the file system. These <i>fifos</i> (or <i>named pipes</i>) 
+        exist beyond the lives of processes. Two different processes can obtain a reference to the pipe
+        with <b>open</b>() as opposed to having to inherit a file descriptor. </li>
+    <li>Writing to a pipe with a filled buffer results in a <b>SIGSTOP</b> signal.</li>
+    <li>Pipes are generally considered to be faster than Unix domain sockets.</li>
+    <li>Processes using pipes must still perform context switches with the kernel to use
+        the <b>read</b>() and <b>write</b>() system calls.</li>
+  </ul>
+
+  <p>As an exception to the fact that pipes must be written from one side and read from the other, 
+     Solaris pipes are full duplex. On Linux and BSD for example, full duplex operations with pipes
+     use two different pipes. Named pipes and unnamed pipes are essentially the same thing with
+     named pipes being created with <b>mkfifo</b>(), and unnamed ones with <b>pipe</b>(). 
+  </p>
+
+  <p>This is not the case with the Windows API. Windows provides two very different facilities, for
+     what it calls named and <i>anonymous</i> pipes. 
+     Anonymous pipes are available in all versions of Windows, and behave
+     much like Unix pipes. 
+     Besides being slower, there are several other variations such as an adjustable pipe cache
+     size that also effects the threshold for atomic writes.
+     Windows named pipes are roughly analogous to Unix domain sockets.
+     They are only available on the NT derived Windows versions, 
+     and do not use the Windows networking socket interface, <i>winsock</i>, at all. 
+     Consequently, traditional socket multiplexing strategies such as <b>select</b>()
+     can not be used with Windows named pipes as they can with unix domain sockets.
+     They do have
+     the advantage of reaching across multiple computers over
+     <a href="http://en.wikipedia.org/wiki/Server_Message_Block">Server Message Block (SMB)</a>. 
+  </p>
+
+  <p><b>Update</b>: It is also worth mentioning that OS/2 has a named pipe that, depending on what information you 
+     are reading, may or may not be able to communicate with Windows named pipes via SMB.
+     Such SMB named pipes can also exist on *nix boxes machines running 
+     <a href="http://www.samba.org/">Samba</a> as part of facilities such as Winbind.
+     Sadly, to my knowledge, there is no way to bridge a Unix domain socket with an SMB named pipe
+     on a Unix environment using Samba without requiring adherence to the Samba project's license
+     restrictions. 
+     Other conceivable avenues for such a bridge might involve 
+     <a href="http://www.cygwin.com/">Cygwin</a>, or even
+     <a href="http://www.dest-unreach.org/socat/">socat</a>.
+  </p>
+
+  <p><b>Update</b>: Another worthwhile comparison to unix sockets is the Linux specific,
+      <a href="http://en.wikipedia.org/wiki/Netlink">netlink</a> socket.  
+      Netlink sockets are used to comunicate between userspace and kernel space.
+      For instance, to update routing or firewall information. 
+      It would be nice to find a good explanation of why another socket type was created 
+      instead of simply using unix sockets with perhaps abstract names (mentioned below).
+  </p>
+  
+  <h3>On with It</h3>
+  <p>A unix domain socket exists only inside a single computer. The word <i>domain</i> here has nothing
+     to do with NIS, LDAP, or Windows, and instead refers to the file system. Unix domain sockets
+     are identified by a file name in the file system like a named pipe would be. 
+     Programs communicating
+     with a Unix domain socket must be on the same computer so they are not really a networking
+     concept so much as they are an inter-process communication (IPC) concept. This explains why
+     most networking books ignore them. They are interfaced with the same sockets API that is used
+     for TCP/IP, UDP/IP, as well as other supported network protocols. You should be thinking at 
+     least two questions right now: "Why would a network program ever support Unix domain sockets 
+     as a transport?", and "Why would programs use a unix domain socket for an IPC mechanism instead of
+     pipes, signals, or shared memory?". Here's some quick answers. 
+  </p>
+  <ul>
+   <li>Unix domain sockets are <i>secure</i> in the network protocol sense of the word, because:
+    <ul>
+     <li>they cannot be eavesdropped on by a untrusted network</li>
+     <li>remote computers cannot connect to them without some sort of forwarding mechanism</li>
+    </ul>
+   </li>
+   <li>They do not require a properly configured network, or even network support at all</li>
+   <li>They are full duplex</li>
+   <li>Many <i>clients</i> can be connect to the same <i>server</i> using the same named socket</li>
+   <li>Both connectionless (datagram), and connection oriented (stream) communication is supported</li>
+   <li>Unix domain sockets are <i>secure</i> in the IPC sense of the word, because:
+    <ul>
+     <li>File permissions can be configured on the socket to limit access to certain users or groups</li>
+     <li>Because everything that is going on takes place on the same computer controlled by a single
+         kernel, the kernel knows everything about the socket and the parties on both sides. 
+         This means that server programs that need authentication can find out what user is connecting
+         to them without having to obtain a user name and password.</li>
+    </ul>
+   </li>
+   <li>Open file descriptors from one process can be sent to another totally unrelated process</li>
+   <li>Parties can know what PID is on the other side of a Unix domain Socket</li>
+   <li>The path name for a socket is limited to <font color="brown">UNIX_PATH_MAX</font> bytes long.
+       On Linux, this is defined as 108 UNIX(7).
+   </li>
+  </ul>
+
+  <p>Not all of these features are available on every Unix. Worse there are variations on the
+     way they are interfaced. Basic operations are pretty universally supported though. Let us move
+     on to some examples.
+  </p>
+
+  <p><b>UPDATE</b>:
+     Many socket programs make use of the <a href="http://pubs.opengroup.org/onlinepubs/009695399/functions/socketpair.html">
+     socketpair</a>() function.
+     This creates a matched pair of sockets without the usual, protocol specific, build up procedures.
+     Typically this is used to create a socket to be for inter-thread communication, or 
+     communication with inherited processes.
+     <font color="brown">PF_UNIX</font> is a valid choice for <b>socketpair</b>()'s <i>domain</i>
+     parameter, allowing for another means to create a unix socket.
+  </p>
+
+  <h3>Basic Connection-Oriented Client &amp; Server</h3>
+
+  <p>We will start with a very basic client and a forking server. A forking server spawns a new
+     process to handle each incoming connection. After a connection is closed, its handler 
+     process exits. This type of server frequently gets a bad reputation due to its poor performance
+     as a web server. The reason it performs poorly as a web server is because with HTTP, every single
+     request is made with its own connection.<b>¹</b>
+     The server thus spends a relatively disproportional 
+     amount of time creating and destroying processes versus actually handling requests. What is
+     not commonly understood is that for other types of protocols which maintain a single connection
+     during the entire time the client uses the server, a forking server is considered an acceptable
+     design. Take <a href="http://www.openssh.org/">Open SSH</a> for example. The primary problem
+     with this design for non-web server applications is that it is no longer as straightforward to share
+     information between all the various handler instances. 
+     Multiplexing and multi-threaded as well as all sorts of other designs are out there, but the 
+     simple <b>fork</b>()ing server is a good as it gets for illustrating examples.
+     Think of it as the "hello world" of server designs. Take the following sources.
+  </p>
+
+  <p><b>¹ UPDATE</b>: <i>While it is true that HTTP2's use of 
+     <a href="http://en.wikipedia.org/wiki/HTTP_persistent_connection">persistent connections</a>
+     does mitigate the above significantly, other aspects of why forking server designs might be choosen
+     such as a 1:1 hanlder process to client user paradigm, are still not leveragable for HTTP.</i>
+  </p>
+
+<table cellspacing="0" cellpadding="5"><caption>client1.c</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</font></pre>
+</td>
+
+<td bgcolor="wheat" valign="top"><pre><font color="green">#include</font> &lt;stdio.h&gt;
+<font color="green">#include</font> &lt;sys/socket.h&gt;
+<font color="green">#include</font> &lt;sys/un.h&gt;
+<font color="green">#include</font> &lt;unistd.h&gt;
+<font color="green">#include</font> &lt;string.h&gt;
+
+<font color="red">int</font> <b>main</b>(<font color="red">void</font>)
+{
+ <font color="blue">struct sockaddr_un</font> address;
+ <font color="red">int</font>  socket_fd, nbytes;
+ <font color="red">char</font> buffer<font color="red">[</font>256<font color="red">]</font>;
+
+ socket_fd <font color="red">=</font> <b>socket</b>(<font color="brown">PF_UNIX</font>, <font color="brown">SOCK_STREAM</font>, 0);
+ <font color="red">if</font>(socket_fd <font color="red">&lt;</font> 0)
+ {
+  <b>printf</b>("<font color="teal">socket() failed<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ }
+
+ <font color="royalblue">/* start with a clean address structure */</font>
+ <b>memset</b>(<font color="red">&amp;</font>address, 0, <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+ 
+ address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>snprintf</b>(address<font color="red">.</font>sun_path, <font color="brown">UNIX_PATH_MAX</font>, "<font color="teal">./demo_socket</font>");
+
+ <font color="red">if</font>(<b>connect</b>(socket_fd, 
+            (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>address, 
+            <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>)) <font color="red">!=</font> 0)
+ {
+  printf("<font color="teal">connect() failed<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ }
+
+ nbytes <font color="red">=</font> <b>snprintf</b>(buffer, 256, "<font color="teal">hello from a client</font>");
+ <b>write</b>(socket_fd, buffer, nbytes);
+ 
+ nbytes <font color="red">=</font> <b>read</b>(socket_fd, buffer, 256);
+ buffer<font color="red">[</font>nbytes<font color="red">]</font> <font color="red">=</font> 0;
+
+ <b>printf</b>("<font color="teal">MESSAGE FROM SERVER: <b>%s\n</b></font>", buffer);
+
+ <b>close</b>(socket_fd);
+
+ <font color="red">return</font> 0;
+}
+</pre></td></tr></tbody></table>
+
+
+<table cellspacing="0" cellpadding="5"><caption>server1.c</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</font></pre>
+</td>
+<td bgcolor="wheat" valign="top"><pre><font color="green">#include</font> &lt;stdio.h&gt;
+<font color="green">#include</font> &lt;sys/socket.h&gt;
+<font color="green">#include</font> &lt;sys/un.h&gt;
+<font color="green">#include</font> &lt;sys/types.h&gt;
+<font color="green">#include</font> &lt;unistd.h&gt;
+<font color="green">#include</font> &lt;string.h&gt;
+
+<font color="red">int</font> <b>connection_handler</b>(<font color="red">int</font> <i>connection_fd</i>)
+{
+ <font color="red">int</font> nbytes;
+ <font color="red">char</font> buffer<font color="red">[</font>256<font color="red">]</font>;
+
+ nbytes <font color="red">=</font> <b>read</b>(<i>connection_fd</i>, buffer, 256);
+ buffer<font color="red">[</font>nbytes<font color="red">]</font> <font color="red">=</font> 0;
+
+ <b>printf</b>("<font color="teal">MESSAGE FROM CLIENT: <b>%s\n</b></font>", buffer);
+ nbytes <font color="red">=</font> <b>snprintf</b>(buffer, 256, "<font color="teal">hello from the server</font>");
+ <b>write</b>(<i>connection_fd</i>, buffer, nbytes);
+ 
+ <b>close</b>(<i>connection_fd</i>);
+ <font color="red">return</font> 0;
+}
+
+<font color="red">int</font> <b>main</b>(<font color="red">void</font>)
+{
+ <font color="blue">struct sockaddr_un</font> address;
+ <font color="red">int</font> socket_fd, connection_fd;
+ <font color="brown">socklen_t</font> address_length;
+ <font color="brown">pid_t</font> child;
+ 
+ socket_fd <font color="red">=</font> <b>socket</b>(<font color="brown">PF_UNIX</font>, <font color="brown">SOCK_STREAM</font>, 0);
+ <font color="red">if</font>(socket_fd <font color="red">&lt;</font> 0)
+ {
+  <b>printf</b>("<font color="teal">socket() failed<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ } 
+
+ <b>unlink</b>("<font color="teal">./demo_socket</font>");
+
+ <font color="royalblue">/* start with a clean address structure */</font>
+ <b>memset</b>(<font color="red">&amp;</font>address, 0, <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+
+ address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>snprintf</b>(address<font color="red">.</font>sun_path, <font color="brown">UNIX_PATH_MAX</font>, "<font color="teal">./demo_socket</font>");
+
+ <font color="red">if</font>(<b>bind</b>(socket_fd, 
+         (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>address, 
+         <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>)) <font color="red">!=</font> 0)
+ {
+  <b>printf</b>("<font color="teal">bind() failed<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ }
+
+ <font color="red">if</font>(<b>listen</b>(socket_fd, 5) <font color="red">!=</font> 0)
+ {
+  <b>printf</b>("<font color="teal">listen() failed<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ }
+
+ <font color="red">while</font>((connection_fd <font color="red">=</font> <b>accept</b>(socket_fd, 
+                               (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>address,
+                               <font color="red">&amp;</font>address_length)) <font color="red">&gt;</font> -1)
+ {
+  child <font color="red">=</font> <b>fork</b>();
+  <font color="red">if</font>(child <font color="red">==</font> 0)
+  {
+   <font color="royalblue">/* now inside newly created connection handling process */</font>
+   <font color="red">return</font> <b>connection_handler</b>(connection_fd);
+  }
+
+  <font color="royalblue">/* still inside server process */</font>
+  <b>close</b>(connection_fd);
+ }
+
+ <b>close</b>(socket_fd);
+ <b>unlink</b>("<font color="teal">./demo_socket</font>");
+ <font color="red">return</font> 0;
+}
+</pre></td></tr></tbody></table>
+
+   <p>Armed with some basic knowledge of C, beginner level Unix system programing,
+      beginner level sockets programing, how to lookup man pages, and Google,
+      the above example will help you create a UDS client and server. To try it out
+      open a couple terminal Windows, run the server in one, and the client in the 
+      other. After that try adding a something like <b>sleep</b>(<i>15</i>) to the server's connection
+      handler, before it <b>write</b>()s back to the client. Bring up two more terminals, one
+      with another instance of client and the other with <b>top</b> or <b>ps -e</b>, also
+      <b>netstat -ax</b>.
+      Experiment with that for a while. Learn anything?
+   </p>
+
+   <p>At this point there are several things we could do with this technology, that is:
+      the ability to have running programs communicate with other arbitrary programs on the
+      same computer. Taking into consideration where in the file system our socket is created
+      and with what permissions,
+      this could allow programs running with different credentials, that started at different times,
+      or even with different login sessions (controlling ttys) to exchange data. 
+      A common example of a program that works like this is <b>syslogd</b>. On many unix
+      types, programs use a unix domain socket to pass log messages to the syslog server.
+   </p>
+
+   <h3>An Authenticated Server</h3>
+
+<table><tbody><tr><td>
+   <p>Let us imagine a database server like <a href="">PostgreSQL</a>. The server can force
+      every client program that connects to it to authenticate itself with a user name and
+      password. It does this so that it can enforce its internal security policies based 
+      on what account a client is connecting with. Having to authenticate with a user name / 
+      password pair every time can get old so often other authentication schemes such as 
+      key pair authentication are used alternatively. In the case of local logins 
+      (client is on the same machine as the server) a feature of unix domain sockets known
+      as <b>credentials passing</b> can be used. 
+   </p>
+
+   <p>This is one area that is going to be different everywhere, so check your reference 
+      material. Let us look at how its done in Linux. 
+   </p>
+
+</td><td>
+<table cellspacing="10" cellpadding="15"><tbody><tr><td bgcolor="5e9c94">
+   <h4 align="center">The Real Sockets IO API</h4>
+   <p>Those new and old to sockets programming are often unaware that the sockets API
+      actually has its own IO routines: <b>send</b>(), <b>sendto</b>(), <b>sendmsg</b>(),
+      <b>recv</b>(), <b>recvfrom</b>(), and <b>recvmsg</b>(). These functions operate on
+      <i>sockets</i>, not file descriptors. Unix automatically creates a file descriptor
+      for a socket when its created (with the same integer value) so that 
+      IO operations can be performed on the socket just as with normal file descriptors,
+      that is with 
+      <b>read</b>(), <b>write</b>(), and the like. This is why most of the time the
+      underlying socket IO functions don't need to be used directly.
+      Certain features do require the use of the lower level functions (like UDP).
+      This is also why in Windows with winsock version 2 or
+      greater (this is the version
+      that internally uses the same open source BSD sockets code, unlike winsock 1) the
+      same send/recv socket IO functions are available (all though not advertised). Also
+      note that Windows too, provides a way to use sockets as Windows file HANDLES.
+    </p>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+   <p>Linux uses a lower level socket function to grab the credentials
+      of the process on the other side of unix domain socket, the multi-purpose <b>getsockopt</b>().
+
+   </p>
+
+<table cellspacing="0" cellpadding="5"><caption>Credentials passing on Linux</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</font></pre>
+</td>
+
+<td bgcolor="wheat" valign="top"><pre> <font color="blue">struct ucred</font> credentials;
+ <font color="red">int</font> ucred_length <font color="red">=</font> <font color="red">sizeof</font>(<font color="blue">struct ucred</font>);
+
+ <font color="royalblue">/* fill in the user data structure */</font>
+ <font color="red">if</font>(<b>getsockopt</b>(connection_fd, <font color="brown">SOL_SOCKET</font>, <font color="brown">SO_PEERCRED</font>, <font color="red">&amp;</font>credentials, <font color="red">&amp;</font>ucred_length))
+ {
+  <b>printf</b>("<font color="teal">could obtain credentials from unix domain socket</font>");
+  <font color="red">return</font> 1;
+ }
+
+ <font color="royalblue">/* the process ID of the process on the other side of the socket */</font>
+ credentials<font color="red">.</font>pid;
+
+ <font color="royalblue">/* the effective UID of the process on the other side of the socket  */</font>
+ credentials<font color="red">.</font>uid;
+
+ <font color="royalblue">/* the effective primary GID of the process on the other side of the socket */</font>
+ credentials<font color="red">.</font>gid;
+
+ <font color="royalblue">/* To get supplemental groups, we will have to look them up in our account
+    database, after a reverse lookup on the UID to get the account name.
+    We can take this opportunity to check to see if this is a legit account.
+ */</font>
+
+</pre></td></tr></tbody></table>
+
+   <h3>File Descriptor Passing</h3>
+ 
+   <p>File descriptors can be sent from one process to another by two means. 
+      One way is by inheritance, the other is by passing through a unix domain
+      socket. There are three reasons I know of why one might do this. The first
+      is that on platforms that don't have a credentials passing mechanism but
+      do have a file descriptor passing mechanism, an authentication scheme 
+      based on file system privilege demonstration could be used instead.
+      The second is if one process has file system privileges that the other
+      does not. The third is scenarios where a server will hand a connection's
+      file descriptor to another already started helper process of some kind.
+      Again this area is different from OS to OS. On Linux this is done with 
+      a socket feature known as <i>ancillary data</i>. 
+   </p>
+   <p>It works by one side sending some data to the other (at least 1 byte) with
+      attached ancillary data. Normally this facility is used for odd features
+      of various underlying network protocols, such as TCP/IP's 
+      <i>out of band data</i>. This is accomplished with the lower level socket
+      function <b>sendmsg</b>() that accepts both arrays of IO vectors and 
+      control data message objects as members of its 
+      <a href="http://www.kernel.org/doc/man-pages/online/pages/man3/cmsg.3.html">
+      <i>struct msghdr</i></a>
+      parameter. Ancillary, also known as control, data in sockets takes the form
+      of a <i>struct cmsghdr</i>. The members of this structure can mean different
+      things based on what type of socket it is used with. Making it even more
+      squirrelly is that most of these structures need to be modified with macros.
+      Here are two example functions based on the ones available in Warren Gay's 
+      book mention at the end of this article. A socket's peer that read data sent
+      to it by <b>send_fd</b>() without using <b>recv_fd</b>() would just get a single capital F.
+   </p>
+
+
+<table cellspacing="0" cellpadding="5"><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</font></pre>
+</td>
+<td bgcolor="wheat" valign="top"><pre> <font color="red">int</font> <b>send_fd</b>(<font color="red">int</font> <i>socket</i>, <font color="red">int</font> <i>fd_to_send</i>)
+ {
+  <font color="blue">struct msghdr</font> socket_message;
+  <font color="blue">struct iovec</font> io_vector<font color="red">[</font>1<font color="red">]</font>;
+  <font color="blue">struct cmsghdr *</font>control_message = <font color="brown">NULL</font>;
+  <font color="red">char</font> message_buffer<font color="red">[</font>1<font color="red">]</font>;
+  <font color="royalblue">/* storage space needed for an ancillary element with a paylod of <i>length</i> is CMSG_SPACE(sizeof(<i>length</i>)) */</font>
+  <font color="red">char</font> ancillary_element_buffer[<font color="brown">CMSG_SPACE</font>(<font color="red">sizeof</font>(<font color="red">int</font>))];
+  <font color="red">int</font> available_ancillary_element_buffer_space;
+
+  <font color="royalblue">/* at least one vector of one byte must be sent */</font>
+  message_buffer<font color="red">[</font>0<font color="red">]</font> <font color="red">=</font> '<font color="teal">F</font>';
+  io_vector<font color="red">[</font>0<font color="red">]</font><font color="red">.</font>iov_base <font color="red">=</font> message_buffer;
+  io_vector<font color="red">[</font>0<font color="red">]</font><font color="red">.</font>iov_len <font color="red">=</font> 1;
+
+  <font color="royalblue">/* initialize socket message */</font>
+  <b>memset</b>(<font color="red">&amp;</font>socket_message, 0, <font color="red">sizeof</font>(<font color="blue">struct msghdr</font>));
+  socket_message<font color="red">.</font>msg_iov <font color="red">=</font> io_vector;
+  socket_message<font color="red">.</font>msg_iovlen <font color="red">=</font> 1;
+
+  <font color="royalblue">/* provide space for the ancillary data */</font>
+  available_ancillary_element_buffer_space = <font color="brown">CMSG_SPACE</font>(<font color="red">sizeof</font>(<font color="red">int</font>));
+  <b>memset</b>(ancillary_element_buffer, 0, available_ancillary_element_buffer_space);
+  socket_message<font color="red">.</font>msg_control <font color="red">=</font> ancillary_element_buffer;
+  socket_message<font color="red">.</font>msg_controllen <font color="red">=</font> available_ancillary_element_buffer_space;
+
+  <font color="royalblue">/* initialize a single ancillary data element for fd passing */</font>
+  control_message <font color="red">=</font> <font color="brown">CMSG_FIRSTHDR</font>(<font color="red">&amp;</font>socket_message);
+  control_message<font color="red">-&gt;</font>cmsg_level <font color="red">=</font> <font color="brown">SOL_SOCKET</font>;
+  control_message<font color="red">-&gt;</font>cmsg_type <font color="red">=</font> <font color="brown">SCM_RIGHTS</font>;
+  control_message<font color="red">-&gt;</font>cmsg_len <font color="red">=</font> <font color="brown">CMSG_LEN</font>(<font color="red">sizeof</font>(<font color="red">int</font>));
+  <font color="red">*</font>((<font color="red">int *</font>) <font color="brown">CMSG_DATA</font>(control_message)) <font color="red">=</font> <i>fd_to_send</i>;
+
+  <font color="red">return</font> <b>sendmsg</b>(<i>socket</i>, <font color="red">&amp;</font>socket_message, 0);
+ }
+</pre></td></tr></tbody></table>
+
+<br>
+<table cellspacing="0" cellpadding="5"><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</font></pre>
+</td>
+<td bgcolor="wheat" valign="top"><pre> <font color="red">int</font> <b>recv_fd</b>(<font color="red">int</font> <i>socket</i>)
+ {
+  <font color="red">int</font> sent_fd, available_ancillary_element_buffer_space;
+  <font color="blue">struct msghdr</font> socket_message;
+  <font color="blue">struct iovec</font> io_vector<font color="red">[</font>1<font color="red">]</font>;
+  <font color="blue">struct cmsghdr *</font>control_message <font color="red">=</font> <font color="brown">NULL</font>;
+  <font color="red">char</font> message_buffer<font color="red">[</font>1<font color="red">]</font>;
+  <font color="red">char</font> ancillary_element_buffer[<font color="brown">CMSG_SPACE</font>(<font color="red">sizeof</font>(<font color="red">int</font>))];
+
+  <font color="royalblue">/* start clean */</font>
+  <b>memset</b>(<font color="red">&amp;</font>socket_message, 0, <font color="red">sizeof</font>(<font color="blue">struct msghdr</font>));
+  <b>memset</b>(ancillary_element_buffer, 0, <font color="brown">CMSG_SPACE</font>(<font color="red">sizeof</font>(<font color="red">int</font>)));
+
+  <font color="royalblue">/* setup a place to fill in message contents */</font>
+  io_vector<font color="red">[</font>0<font color="red">]</font><font color="red">.</font>iov_base <font color="red">=</font> message_buffer;
+  io_vector<font color="red">[</font>0<font color="red">]</font><font color="red">.</font>iov_len <font color="red">=</font> 1;
+  socket_message<font color="red">.</font>msg_iov <font color="red">=</font> io_vector;
+  socket_message<font color="red">.</font>msg_iovlen <font color="red">=</font> 1;
+
+  <font color="royalblue">/* provide space for the ancillary data */</font>
+  socket_message<font color="red">.</font>msg_control <font color="red">=</font> ancillary_element_buffer;
+  socket_message<font color="red">.</font>msg_controllen <font color="red">=</font> <font color="brown">CMSG_SPACE</font>(<font color="red">sizeof</font>(<font color="red">int</font>));
+
+  <font color="red">if</font>(<b>recvmsg</b>(<i>socket</i>, <font color="red">&amp;</font>socket_message, <font color="brown">MSG_CMSG_CLOEXEC</font>) <font color="red">&lt;</font> 0)
+   <font color="red">return</font> -1;
+
+  <font color="red">if</font>(message_buffer<font color="red">[</font>0<font color="red">]</font> <font color="red">!=</font> '<font color="teal">F</font>')
+  {
+   <font color="royalblue">/* this did not originate from the above function */</font>
+   <font color="red">return</font> -1;
+  }
+
+  <font color="red">if</font>((socket_message<font color="red">.</font>msg_flags <font color="red">&amp;</font> <font color="brown">MSG_CTRUNC</font>) <font color="red">==</font> <font color="brown">MSG_CTRUNC</font>)
+  {
+   <font color="royalblue">/* we did not provide enough space for the ancillary element array */</font>
+   <font color="red">return</font> -1;
+  }
+
+  <font color="royalblue">/* iterate ancillary elements */</font>
+   <font color="red">for</font>(control_message <font color="red">=</font> <font color="brown">CMSG_FIRSTHDR</font>(<font color="red">&amp;</font>socket_message);
+       control_message <font color="red">!=</font> <font color="brown">NULL</font>;
+       control_message <font color="red">=</font> <font color="brown">CMSG_NXTHDR</font>(<font color="red">&amp;</font>socket_message, control_message))
+  {
+   <font color="red">if</font>( (control_message<font color="red">-&gt;</font>cmsg_level <font color="red">==</font> <font color="brown">SOL_SOCKET</font>) <font color="red">&amp;&amp;</font>
+       (control_message<font color="red">-&gt;</font>cmsg_type <font color="red">==</font> <font color="brown">SCM_RIGHTS</font>) )
+   {
+    sent_fd <font color="red">=</font> <font color="red">*</font>((<font color="red">int *</font>) <font color="brown">CMSG_DATA</font>(control_message));
+    <font color="red">return</font> sent_fd;
+   }
+  }
+
+  <font color="red">return</font> -1;
+ }
+</pre></td></tr></tbody></table>
+
+
+   <h3>Datagram Unix Domain Sockets</h3>
+
+   <p>Most of the time programs that communicate over a network work with <i>stream</i>,
+      or <i>connection oriented</i> technology. This is when an additional software layer such 
+      as TCP's <i>Nagle algorithm</i> creates a virtual communication circuit out of
+      the many single atomic (stateless) packets used by a underlying <i>packet switched network</i>. 
+      Sometimes we want to instead simply work with individual packets, such is the case with UDP.
+      This technology is often called <i>datagram communication</i>.
+      This strategy allows for a variety of trade-offs. One is the ability to make a low overhead,
+      high performance server
+      with a single context or "main loop" that handles multiple simultaneous clients. 
+      Although unix domain sockets are not a network protocol they do utilize the sockets 
+      network interface, and as such also provide datagram features.
+   </p>
+
+   <p>Datagram communication works best with an application that can put a complete atomic message 
+      of some sort in a single packet. This can be a problem for UDP as various setbacks can 
+      limit the size of a packet to as little as 512 bytes. The limit for datagrams over a unix     
+      domain socket is much higher. <strike>A complete example is beyond our scope for this article.
+      Those interested should find a UDP example (much easier to find) and combine that with
+      the techniques above.</strike> 
+      <b>Update</b>: A practical example on this site that does use datagram unix sockets is the
+      PLC data proxy server, <a href="http://www.thomasstover.com/ladtools/dndataserver.html">dndataserver</a>, from the 
+      <a href="http://www.thomasstover.com/ladtools/index.html">LAD Tools</a> project.
+      Designing servers this way can be a decent strategy to allow multiple processes to 
+      simultaniously share a resource (in this case PLC serial network access), without as much 
+      complexity as a connection oriented server.
+      Let us review some of the considerations with datagram unix sockets, before we examine some
+      example code.
+    </p>
+    <ul>
+     <li>If we want want messages (datagrams) from the server to be able to be sent back to the client,
+         then the client will also need to bind to an address. 
+     </li>
+     <li>The server has to use a sockaddr structure to hold some reference to the client's 
+         return address.
+     </li>
+    </ul>
+
+    <table cellspacing="0" cellpadding="5"><caption>server2.c</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+55
+56
+57
+58
+59
+60
+61
+62</font></pre>
+</td>
+    <td bgcolor="wheat" valign="top">
+<pre><font color="green">#include</font> &lt;sys/socket.h&gt;
+<font color="green">#include</font> &lt;sys/un.h&gt;
+<font color="green">#include</font> &lt;stdio.h&gt;
+<font color="green">#include</font> &lt;string.h&gt;
+<font color="green">#include</font> &lt;unistd.h&gt;
+
+<font color="red">int</font> <b>main</b>(<font color="red">void</font>)
+{
+ <font color="red">int</font> socket_fd;
+ <font color="blue">struct sockaddr_un</font> server_address; 
+ <font color="blue">struct sockaddr_un</font> client_address; 
+ <font color="red">int</font> bytes_received, bytes_sent, address_length;
+ <font color="red">int</font> integer_buffer;
+ <font color="brown">socklen_t</font> address_length <font color="red">=</font> <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>);
+
+ <font color="red">if</font>((socket_fd <font color="red">=</font> <b>socket</b>(<font color="brown">AF_UNIX</font>, <font color="brown">SOCK_DGRAM</font>, 0)) <font color="red">&lt;</font> 0)
+ {
+  <b>perror</b>("<font color="teal">server: socket</font>");
+  <font color="red">return</font> 1;
+ }
+ 
+ <b>memset</b>(<font color="red">&amp;</font>server_address, 0, <font color="red">sizeof</font>(server_address));
+ server_address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>strcpy</b>(server_address<font color="red">.</font>sun_path, "<font color="teal">./UDSDGSRV</font>");
+ 
+ <b>unlink</b>("<font color="teal">./UDSDGSRV</font>");       
+ <font color="red">if</font>(<b>bind</b>(socket_fd, (<font color="blue">const struct sockaddr *</font>) <font color="red">&amp;</font>server_address, <font color="red">sizeof</font>(server_address)) <font color="red">&lt;</font> 0)
+ {
+  <b>close</b>(socket_fd);
+  <b>perror</b>("<font color="teal">server: bind</font>");
+  <font color="red">return</font> 1;
+ }
+
+ <font color="red">while</font>(1)
+ {
+  <font color="royalblue">/* address_length is the length of the client's socket address structure.
+     Hear this should always be the same since these socets are of type struct sockaddr_un. 
+     However, code that could be used with different types of sockets, ie UDS and UPD should
+     take care to hold and pass the correct value back to sendto on reply.  */</font>
+
+  bytes_received <font color="red">=</font> <b>recvfrom</b>(socket_fd, (<font color="red">char *</font>) <font color="red">&amp;</font>integer_buffer, <font color="red">sizeof</font>(<font color="red">int</font>), 0, 
+                            (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>(client_address),
+                            <font color="red">&amp;</font>address_length);
+
+  <font color="red">if</font>(bytes_received <font color="red">!=</font> <font color="red">sizeof</font>(<font color="red">int</font>))
+  {
+   <b>printf</b>("<font color="teal">datagram was the wrong size.<b>\n</b></font>");
+  } <font color="red">else</font> {
+   integer_buffer <font color="red">+=</font> 5;
+
+   bytes_sent <font color="red">=</font> <b>sendto</b>(socket_fd, (<font color="red">char *</font>) <font color="red">&amp;</font>integer_buffer, <font color="red">sizeof</font>(<font color="red">int</font>), 0,
+                       (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>(client_address), 
+                        <font color="red">&amp;</font>address_length));
+  }
+ }
+
+ <b>unlink</b>("<font color="teal">./UDSDGSRV</font>");
+ <b>close</b>(socket_fd);
+
+ <font color="red">return</font> 0;
+}</pre></td></tr></tbody></table>
+
+<table cellspacing="0" cellpadding="5"><caption>client2.c</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+55
+56
+57
+58
+59
+60</font></pre>
+</td>
+
+<td bgcolor="wheat" valign="top">
+<pre><font color="green">#include</font> &lt;sys/socket.h&gt;
+<font color="green">#include</font> &lt;sys/un.h&gt;
+<font color="green">#include</font> &lt;stdio.h&gt;
+<font color="green">#include</font> &lt;string.h&gt;
+<font color="green">#include</font> &lt;unistd.h&gt;
+
+<font color="red">int</font> <b>main</b>(<font color="red">void</font>)
+{
+ <font color="red">int</font> socket_fd;
+ <font color="blue">struct sockaddr_un</font> server_address; 
+ <font color="blue">struct sockaddr_un</font> client_address; 
+ <font color="red">int</font> bytes_received, bytes_sent, address_length, integer_buffer;
+ <font color="brown">socklen_t</font> address_length;
+
+ <font color="red">if</font>((socket_fd <font color="red">=</font> <b>socket</b>(<font color="brown">AF_UNIX</font>, <font color="brown">SOCK_DGRAM</font>, 0)) <font color="red">&lt;</font> 0)
+ {
+  <b>perror</b>("<font color="teal">client: socket</font>");
+  <font color="red">return</font> 1;
+ }
+       
+ <b>memset</b>(<font color="red">&amp;</font>client_address, 0, <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+ client_address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>strcpy</b>(client_address<font color="red">.</font>sun_path, "<font color="teal">./UDSDGCLNT</font>");
+
+ <b>unlink</b>("<font color="teal">./UDSDGCLNT</font>");
+ <font color="red">if</font>(<b>bind</b>(socket_fd, (<font color="blue">const struct sockaddr *</font>) <font color="red">&amp;</font>client_address, 
+         <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>)) <font color="red">&lt;</font> 0)
+ {
+  <b>perror</b>("<font color="teal">client: bind</font>");
+  <font color="red">return</font> 1;
+ }
+
+ <b>memset</b>(<font color="red">&amp;</font>server_address, 0, <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+ server_address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>strcpy</b>(server_address<font color="red">.</font>sun_path, "<font color="teal">./UDSDGSRV</font>");
+
+ integer_buffer <font color="red">=</font> 5;
+
+ bytes_sent <font color="red">=</font> <b>sendto</b>(socket_fd, (<font color="red">char *</font>) <font color="red">&amp;</font>integer_buffer, <font color="red">sizeof</font>(<font color="red">int</font>), 0,
+                     (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>server_address, 
+                     <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+
+ address_length <font color="red">=</font> <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>);
+ bytes_received <font color="red">=</font> <b>recvfrom</b>(socket_fd, (<font color="red">char *</font>) <font color="red">&amp;</font>integer_buffer, <font color="red">sizeof</font>(<font color="red">int</font>), 0, 
+                           (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>(server_address),
+                           <font color="red">&amp;</font>address_length);
+
+ <b>close</b>(socket_fd);
+
+ <font color="red">if</font>(bytes_received <font color="red">!=</font> <font color="red">sizeof</font>(<font color="red">int</font>))
+ {
+  <b>printf</b>("<font color="teal">wrong size datagram<b>\n</b></font>");
+  <font color="red">return</font> 1;
+ }
+
+ <b>printf</b>("<font color="teal"><b>%d\n</b></font>", integer_buffer);
+
+ <font color="red">return</font> 0;
+}</pre></td>
+
+    </tr>
+    </tbody></table>
+
+
+<table cellspacing="10" cellpadding="15"><tbody><tr><td bgcolor="5e9c94">
+   <h4 align="center">Update: Broadcast Datagrams</h4>
+   <p>The other main reason datagrams are used in network programming is in broadcast and multicast
+      tasks. 
+      Unfortunately, there is no broadcast mechanism in Unix domain sockets. 
+      Unix provides the <b>killpg</b>() call for sending a signal to all members of a process group. 
+      This can be used to implement a broadcast facility of sorts, potentially in conjunction with shared memory.
+      Linux specifically, also has the <b>futex</b>() call which also has the ability signal more than one process. 
+      On Windows, take a look at the <b>mail slots</b> IPC facility. 
+   </p>
+</td></tr></tbody></table>
+
+   <h3>Abstract Names</h3>
+
+   <p>Another Linux specific feature is <i>abstract names</i> for unix domain sockets. Abstract named
+      sockets are identical to regular UDS except that their name does not exist in the file system.
+      This means two things: file permissions do not apply, and they can be accessed from inside
+      <i>chroot()</i> jails. The trick is to make the first byte of the address name null. Look at the 
+      output from <b>netstat -au</b> to see what it looks while one of these abstract named sockets
+      is in use. Example:
+   </p>
+
+
+<table cellspacing="0" cellpadding="5"><caption>setting the first byte to null</caption><tbody><tr>
+<td bgcolor="wheat" valign="top" align="right">
+<pre><font color="000000">1
+2
+3
+4
+5
+6</font></pre>
+</td>
+<td bgcolor="wheat" valign="top"><pre> address<font color="red">.</font>sun_family <font color="red">=</font> <font color="brown">AF_UNIX</font>;
+ <b>snprintf</b>(address<font color="red">.</font>sun_path, <font color="brown">UNIX_PATH_MAX</font>, "<font color="teal">#demo_socket</font>");
+ 
+ address<font color="red">.</font>sun_path<font color="red">[</font>0<font color="red">]</font> <font color="red">=</font> 0;
+
+ <b>bind</b>(socket_fd, (<font color="blue">struct sockaddr *</font>) <font color="red">&amp;</font>address, <font color="red">sizeof</font>(<font color="blue">struct sockaddr_un</font>));
+</pre></td></tr></tbody></table>
+
+
+   <h3>Conclusion</h3>
+
+   <p>Even if you never need to directly program UD sockets, they are an important facet of understanding
+      both the Unix security model and the inter-workings of the operating system. For those that do
+      use them, they open up a world of possibilities.
+   </p>
+
+   <br>
+   <h4>Further Reading</h4>
+   <p>
+   <a href="http://nostarch.com/tlpi">
+    <img src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/linuxprogramming.png"></a>
+
+   <a href="http://www.danlj.org/lad/">
+    <img src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/ladcover-sm.jpg"></a>
+
+   <a href="http://www.abe.pl/html/english/details.php?id=0789722410">
+    <img src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/0789722410.jpg"></a>
+  </p>
+
+  <br>
+  <h4>Contributing Credits</h4>
+
+  <p><b>November 2011</b>
+     Jeffery D. Wheelhouse noticed the CMSG_SPACE(int) macro calls should
+     actually be CMSG_SPACE(sizeof(int)) in the file descriptor passing code.
+  </p>
+
+  <p><b>May 2011</b>
+     Mayer Alexander noticed the socket length parameter to many of the system calls
+     was completely wrong.
+  </p>
+
+  <p><b>May 2011</b>. 
+     Dennis Lubert wrote in about errors he found in the file descriptor code
+     examples. Then he helped fix my fixes to those errors. :)</p>
+
+  <p><b>April 2011</b>. 
+     Adam Ludwikowski was kind enough to send in several spelling and typographical corrections.</p>
+
+  <br>
+  <p align="right">© 2006 - 2012 C. Thomas Stover</p>
+  <p align="right"><i><b>cts</b> at <b>thomasstover.com</b></i></p>
+        <p></p><p><a href="http://www.thomasstover.com/index.html" "="">back</a></p>
+
+
+<div id="disqus_thread"><iframe id="dsq-2" data-disqus-uid="2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/saved_resource.html" horizontalscrolling="no" verticalscrolling="no" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 4502px !important;"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'techdeviancy';
+    var disqus_url = 'http://www.thomasstover.com/uds.html';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+
+
+
+       </td>
+      </tr>
+     </tbody></table>
+
+    </td>
+
+    <td valign="top">
+     <br><br><br>
+     <table cellpadding="10"><tbody><tr><td bgcolor="414141">
+     <a href="http://www.thomasstover.com/consultancy.html"><img src="./Tech Deviancy - Demystifying Unix Domain Sockets_files/consulting.jpg" alt="Need Help? Consulting"></a>
+     </td></tr></tbody></table>
+
+    </td>
+   </tr>
+  </tbody></table>
+
+
+ 
+
+
+</body></html>

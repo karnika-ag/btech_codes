@@ -1,0 +1,1 @@
+cmd_/home/light/yad/time.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-34-generic/scripts/module-common.lds --build-id  -o /home/light/yad/time.ko /home/light/yad/time.o /home/light/yad/time.mod.o

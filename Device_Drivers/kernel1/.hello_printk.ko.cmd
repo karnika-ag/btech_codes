@@ -1,0 +1,1 @@
+cmd_/home/light/kernel1/hello_printk.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-34-generic/scripts/module-common.lds --build-id  -o /home/light/kernel1/hello_printk.ko /home/light/kernel1/hello_printk.o /home/light/kernel1/hello_printk.mod.o

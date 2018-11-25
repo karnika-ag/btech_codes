@@ -1,0 +1,224 @@
+Turbo Assembler	 Version 4.1	    02/25/14 24:21:15	    Page 1
+macros.asm
+
+
+
+      1					 ;---------------------------------------------------------------------------
+      2					 ;---------------------------------------------------------------------------
+      3					 ;MACRO	DEFINITIONS
+      4					 INITZ	 MACRO			 ;MACRO	TO INITIALISE THE
+      5							 MOV	 AX,@data	 ;DATA SEGMENT REGISTER	AND
+      6							 MOV	 DS,AX		 ;THE EXTRA SEGMENT REGISTER
+      7							 MOV	 ES,AX		 ;WITH THE ADDRESS OF THE
+      8							 ENDM			 ;DATA SEGMENT.
+      9
+     10					 FINISH	 MACRO			 ;MACRO	TO END PROCESSING
+     11							 MOV	 AX,4C00H	 ;AND RETURN CONTROL TO
+     12							 INT	 21H			 ;COMMAND PROMPT.
+     13							 ENDM
+     14
+     15					 DISPLYC MACRO	 CHAR
+     16							 PUSHA
+     17							 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+     18							 MOV	 DL,CHAR	 ;CHARACTER ON THE CONSOLE
+     19							 INT	 21H			 ;SCREEN.
+     20							 POPA
+     21							 ENDM
+     22
+     23					 ENTR	 MACRO
+     24							 DISPLYC 0AH		 ;MACRO	TO PRINT AN ENTER
+     25							 DISPLYC 0DH		 ;ON CONSOLE SCREEN.
+     26							 ENDM
+     27
+     28					 DISPLYS MACRO	 STRING
+     29							 PUSHA
+     30							 MOV	 AH,09H		 ;MACRO	TO DISPLAY A STRING
+     31							 LEA	 DX,STRING	 ;ON THE SCREEN.
+     32							 INT	 21H
+     33							 POPA
+     34							 ENDM
+     35
+     36					 KBIP	 MACRO	 PARA_LIST
+     37							 PUSHA
+     38							 MOV	 AH,0AH		 ;MACRO	TO DISPLAY A CHARACTER
+     39							 LEA	 DX,PARA_LIST;ON THE SCREEN.
+     40							 INT	 21H
+     41							 POPA
+     42							 ENDM
+     43					 SETCSR	 MACRO	 ROW,COL
+     44							 PUSHA
+     45						 MOV	 AH,02H	  ;REQUEST SET CURSOR
+     46						 MOV	 BH,00	  ;PG NO=0
+     47						 MOV	 DH,ROW	   ;ROW	NO=8
+     48						 MOV	 DL,COL	  ;COLUMN=15
+     49						 INT	 10H
+     50						 POPA
+     51							 ENDM
+     52					 ;---------------------------------------------------------------------------
+     53	    0000			 .MODEL	 SMALL
+     54					 ;---------------------------------------------------------------------------
+     55					 .386
+     56					 ;---------------------------------------------------------------------------
+     57	    0000			 .STACK	 64
+Turbo Assembler	 Version 4.1	    02/25/14 24:21:15	    Page 2
+macros.asm
+MACROS
+
+
+     58					 ;---------------------------------------------------------------------------
+     59	    0000			 .DATA
+     60	    0000  4E 41	4D 45 3F 20 24	 MESSG1	 DB	 'NAME?	', '$'
+     61	    0007  41 44	44 52 45 53 53+	 MESSG2	 DB	 'ADDRESS? ', '$'
+     62		  3F 20	24
+     63
+     64	    0011			 PARA_LIST	 LABEL	 BYTE
+     65	    0011  14			 MAX_LEN DB	 20
+     66	    0012  ??			 ACT_LEN DB	 ?
+     67	    0013  14*(20) 24		 KB_DATA DB	 20	 DUP(' '),'$'
+     68					 ;---------------------------------------------------------------------------
+     69	    0028			 .CODE
+     70
+     71	    0000			 MAIN	 PROC	 FAR
+     72							 INITZ
+1    73	    0000  B8 0000s				 MOV	 AX,@data	 ;DATA SEGMENT REGISTER	AND
+1    74	    0003  8E D8					 MOV	 DS,AX		 ;THE EXTRA SEGMENT REGISTER
+1    75	    0005  8E C0					 MOV	 ES,AX		 ;WITH THE ADDRESS OF THE
+     76							 DISPLYS MESSG1
+1    77	    0007  60					 PUSHA
+1    78	    0008  B4 09					 MOV	 AH,09H		 ;MACRO	TO DISPLAY A MESSG1
+1    79	    000A  BA 0000r				 LEA	 DX,MESSG1	 ;ON THE SCREEN.
+1    80	    000D  CD 21					 INT	 21H
+1    81	    000F  61					 POPA
+     82							 ENTR
+1    83							 DISPLYC 0AH		 ;MACRO	TO PRINT AN ENTER
+2    84	    0010  60					 PUSHA
+2    85	    0011  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2    86	    0013  B2 0A					 MOV	 DL,0AH		 ;CHARACTER ON THE CONSOLE
+2    87	    0015  CD 21					 INT	 21H			 ;SCREEN.
+2    88	    0017  61					 POPA
+1    89							 DISPLYC 0DH		 ;ON CONSOLE SCREEN.
+2    90	    0018  60					 PUSHA
+2    91	    0019  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2    92	    001B  B2 0D					 MOV	 DL,0DH		 ;CHARACTER ON THE CONSOLE
+2    93	    001D  CD 21					 INT	 21H			 ;SCREEN.
+2    94	    001F  61					 POPA
+     95							 DISPLYS MESSG2
+1    96	    0020  60					 PUSHA
+1    97	    0021  B4 09					 MOV	 AH,09H		 ;MACRO	TO DISPLAY A MESSG2
+1    98	    0023  BA 0007r				 LEA	 DX,MESSG2	 ;ON THE SCREEN.
+1    99	    0026  CD 21					 INT	 21H
+1   100	    0028  61					 POPA
+    101							 ENTR
+1   102							 DISPLYC 0AH		 ;MACRO	TO PRINT AN ENTER
+2   103	    0029  60					 PUSHA
+2   104	    002A  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2   105	    002C  B2 0A					 MOV	 DL,0AH		 ;CHARACTER ON THE CONSOLE
+2   106	    002E  CD 21					 INT	 21H			 ;SCREEN.
+2   107	    0030  61					 POPA
+1   108							 DISPLYC 0DH		 ;ON CONSOLE SCREEN.
+2   109	    0031  60					 PUSHA
+2   110	    0032  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2   111	    0034  B2 0D					 MOV	 DL,0DH		 ;CHARACTER ON THE CONSOLE
+2   112	    0036  CD 21					 INT	 21H			 ;SCREEN.
+2   113	    0038  61					 POPA
+    114							 DISPLYC 65
+Turbo Assembler	 Version 4.1	    02/25/14 24:21:15	    Page 3
+macros.asm
+MACROS
+
+
+1   115	    0039  60					 PUSHA
+1   116	    003A  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+1   117	    003C  B2 41					 MOV	 DL,65		 ;CHARACTER ON THE CONSOLE
+1   118	    003E  CD 21					 INT	 21H			 ;SCREEN.
+1   119	    0040  61					 POPA
+    120							 ENTR
+1   121							 DISPLYC 0AH		 ;MACRO	TO PRINT AN ENTER
+2   122	    0041  60					 PUSHA
+2   123	    0042  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2   124	    0044  B2 0A					 MOV	 DL,0AH		 ;CHARACTER ON THE CONSOLE
+2   125	    0046  CD 21					 INT	 21H			 ;SCREEN.
+2   126	    0048  61					 POPA
+1   127							 DISPLYC 0DH		 ;ON CONSOLE SCREEN.
+2   128	    0049  60					 PUSHA
+2   129	    004A  B4 02					 MOV	 AH,02H		 ;MACRO	TO PRINT A SINGLE
+2   130	    004C  B2 0D					 MOV	 DL,0DH		 ;CHARACTER ON THE CONSOLE
+2   131	    004E  CD 21					 INT	 21H			 ;SCREEN.
+2   132	    0050  61					 POPA
+    133							 KBIP	 PARA_LIST
+1   134	    0051  60					 PUSHA
+1   135	    0052  B4 0A					 MOV	 AH,0AH		 ;MACRO	TO DISPLAY A CHARACTER
+1   136	    0054  BA 0011r				 LEA	 DX,PARA_LIST;ON THE SCREEN.
+1   137	    0057  CD 21					 INT	 21H
+1   138	    0059  61					 POPA
+    139							 ;ENTR
+    140							 SETCSR	 10,10
+1   141	    005A  60					 PUSHA
+1   142	    005B  B4 02				 MOV	 AH,02H	  ;REQUEST SET CURSOR
+1   143	    005D  B7 00				 MOV	 BH,00	  ;PG NO=0
+1   144	    005F  B6 0A				 MOV	 DH,10	  ;10 NO=8
+1   145	    0061  B2 0A				 MOV	 DL,10	 ;COLUMN=15
+1   146	    0063  CD 10				 INT	 10H
+1   147	    0065  61				 POPA
+    148							 DISPLYS KB_DATA
+1   149	    0066  60					 PUSHA
+1   150	    0067  B4 09					 MOV	 AH,09H		 ;MACRO	TO DISPLAY A KB_DATA
+1   151	    0069  BA 0013r				 LEA	 DX,KB_DATA	 ;ON THE SCREEN.
+1   152	    006C  CD 21					 INT	 21H
+1   153	    006E  61					 POPA
+    154							 ;ENTR
+    155							 FINISH
+1   156	    006F  B8 4C00				 MOV	 AX,4C00H	 ;AND RETURN CONTROL TO
+1   157	    0072  CD 21					 INT	 21H			 ;COMMAND PROMPT.
+    158	    0074			 MAIN	 ENDP
+    159
+    160					 END	 MAIN
+Turbo Assembler	 Version 4.1	    02/25/14 24:21:15	    Page 4
+Symbol Table
+MACROS
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/25/14"
+??FILENAME			  Text	 "macros  "
+??TIME				  Text	 "24:21:15"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0F0FH
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 MACROS
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+ACT_LEN				  Byte	 DGROUP:0012
+KB_DATA				  Byte	 DGROUP:0013
+MAIN				  Far	 _TEXT:0000
+MAX_LEN				  Byte	 DGROUP:0011
+MESSG1				  Byte	 DGROUP:0000
+MESSG2				  Byte	 DGROUP:0007
+PARA_LIST			  Byte	 DGROUP:0011
+
+Macro Name
+
+DISPLYC
+DISPLYS
+ENTR
+FINISH
+INITZ
+KBIP
+SETCSR
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0040 Para	  Stack	  STACK
+  _DATA				  16  0028 Word	  Public  DATA
+_TEXT				  16  0074 Word	  Public  CODE
+

@@ -1,0 +1,1 @@
+cmd_/home/light/usb_driver4/pen_driver.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-44-generic/scripts/module-common.lds --build-id  -o /home/light/usb_driver4/pen_driver.ko /home/light/usb_driver4/pen_driver.o /home/light/usb_driver4/pen_driver.mod.o
